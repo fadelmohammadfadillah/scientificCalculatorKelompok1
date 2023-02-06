@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "trigonometri.h"
+#include "fadel.h"
 
 int main (){
 	for (;;){
