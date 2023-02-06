@@ -12,8 +12,9 @@ void swap(int *a, int *b);
 
 
 
-float ProgramStatistika(n){
+float ProgramStatistika(){
 	int i;
+	int n=5;
 	int d;
 	float sum=0.0, mean;
 	float num[100];
@@ -36,39 +37,39 @@ switch(d){
 	
 	
 	//median
-	case 2:
-	for(i=0; i<n; i++){
-	printf("%d. Masukan : ", i+1);
-	scanf("%f", &num[i]);
-	}
-	sort(num, n);
-	int tengah = n/2;
-	if(n%2==0){
-		printf("median : %.2f\n",(float)(num[tengah-1]+ num[tengah])/2);
-	}else {
-		printf("Median : %d\n", num[tengah]);
-	}
-	system("\npause");
-	break;
+//	case 2:
+//	for(i=0; i<n; i++){
+//	printf("%d. Masukan : ", i+1);
+//	scanf("%f", &num[i]);
+//	}
+//	sort(num, n);
+//	int tengah = n/2;
+//	if(n%2==0){
+//		printf("median : %.2f\n",(float)(num[tengah-1]+ num[tengah])/2);
+//	}else {
+//		printf("Median : %d\n", num[tengah]);
+//	}
+//	system("\npause");
+//	break;
 	
 }
 }
 
 
-void sort(int num[100], int n){
-	int j,k;
-	 for (int j = 0; j < n-1; j++) {
-        for (int k = 0; k < n-j-1; k++) {
-            if (num[k] > num[k+1]) {
-                swap(&num[k], &num[k+1]);
-            }
-        }
-    }
-}
+//void sort(int num[100], int n){
+//	int j,k;
+//	 for (int j = 0; j < n-1; j++) {
+//        for (int k = 0; k < n-j-1; k++) {
+//            if (num[k] > num[k+1]) {
+//                swap(&num[k], &num[k+1]);
+//            }
+//        }
+//    }
+//}
 
-
-void swap(int *a, int *b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
+//
+//void swap(int *a, int *b) {
+//    int temp = *a;
+//    *a = *b;
+//    *b = temp;
+//}
