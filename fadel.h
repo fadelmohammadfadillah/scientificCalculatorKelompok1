@@ -16,25 +16,57 @@ double HitungTan(double rad){
 }
 void MenuTrigonometri(){
     double numInDegree, numInRad, jawaban;
-    int pilihan;
+    int pilihan, is_on = 1;
 
-    printf("1. Hitung Sin\n");
-    printf("2. Hitung Cos\n");
-    printf("3. Hitung Tan\n");
-    scanf("%d", &pilihan);
-
-    printf("Masukkan angka dalam derajat: ");
-    scanf("%lf", &numInDegree);
-    numInRad = numInDegree * PI / 180;
-    if (pilihan == 1){
-        jawaban=HitungSin(numInRad);
-        printf("%lf", jawaban);
-    } else if (pilihan == 2){
-        jawaban=HitungCos(numInRad);
-        printf("%lf", jawaban);
-    }else if (pilihan == 3){
-        jawaban=HitungTan(numInRad);
-        printf("%lf", jawaban);
-    }
+    while(is_on == 1){
+    	printf("1. Hitung Sin\n");
+	    printf("2. Hitung Cos\n");
+	    printf("3. Hitung Tan\n");
+	    printf("4. Kembali ke menu\n");
+	    scanf("%d", &pilihan);
+	    fflush(stdin);
+	    numInRad = numInDegree * PI / 180;
+	    switch (pilihan){
+			case 1: {printf("Masukkan angka dalam derajat: ");
+	    	scanf("%lf", &numInDegree);
+			fflush(stdin);
+	        jawaban=HitungSin(numInRad);
+	        printf("sin %.2lf adalah: %.3lf\n", numInDegree, jawaban);
+	        system("pause");
+			system("cls");
+			break;
+			}
+			case 2: {printf("Masukkan angka dalam derajat: ");
+	    	scanf("%lf", &numInDegree);
+			fflush(stdin);
+	        jawaban=HitungCos(numInRad);
+	        printf("cos %.2lf adalah: %.3lf\n", numInDegree, jawaban);
+	        system("pause");
+			system("cls");
+			break;
+			}
+			case 3: {printf("Masukkan angka dalam derajat: ");
+		    scanf("%lf", &numInDegree);
+			fflush(stdin);
+	        jawaban=HitungTan(numInRad);
+	        printf("tan %.2lf adalah: %.3lf\n", numInDegree, jawaban);
+	        system("pause");
+			system("cls");
+			break;
+			}
+			case 4: {fflush(stdin);
+			system("cls");
+			is_on = 0;
+			break;
+			}
+			default: {
+				printf("\n\n---Invalid Input---\n\n---Mohon Ulangi---\n");
+				system("pause");
+				system("cls");
+				MenuTrigonometri();
+				break;
+			}
+		}
+	}
 }
 #endif

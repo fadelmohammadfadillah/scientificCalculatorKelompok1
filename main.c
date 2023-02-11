@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
 #include "fadel.h"
 #include "reno.h"
 #include "adi.h"
@@ -8,38 +9,54 @@
 #include "rafi.h"
 
 int main (){
-	for (;;){
+	int is_on = 1;
+	while (is_on == 1){
 		int pilihan;
-		printf("Menu Kalkulator: \n");
+	 	printf("Menu Kalkulator: \n");
 		printf("1. Operasi Trigonometri\n");
 		printf("2. Konversi Suhu\n");
 	    printf("3. Operasi Eksponen\n");
 	    printf("4. Operasi Aritmatika\n");
 	    printf("5. Operasi Statistika\n");
 	    printf("6. Operasi Pecahan\n");
+	    printf("0. Exit Program\n");
 	    printf("pilihan : ");
 	    scanf("%d", &pilihan);
 	    switch(pilihan){
-	    	case 1: {MenuTrigonometri();
-				break;
+	    	case 1: {system("cls");
+			MenuTrigonometri();
+			break;
 			}
-			case 2: {menu_pilih_tipe_suhu ();
-				break;
+			case 2: {system("cls");
+			menu_pilih_tipe_suhu ();
+			break;
 			}
-			case 3: {menuEksponen();
-				break;
+			case 3: {system("cls");
+			menuEksponen();
+			break;
 			}
-			case 4: {aritmatika();
-				break;
+			case 4: {system("cls");
+			aritmatika();
+			break;
 			}
-			case 5: {ProgramStatistika();
-				break;
+			case 5: {system("cls");
+			ProgramStatistika();
+			break;
 			}
-			case 6: {menuPecahan();
-				break;
+			case 6: {system("cls");
+			menuPecahan();
+			break;
 			}
 			case 0: {
-				exit(0);
+			is_on = 0;
+			break;
+			}
+			default: {
+				printf("\n\n---Invalid Input---\n\n---Mohon Ulangi---\n");
+				system("pause");
+				system("cls");
+				main();
+				break;
 			}
 		}
 	}
