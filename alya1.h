@@ -1,16 +1,18 @@
+#ifndef alya1_H
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <conio.h>
-#define alya1.H
-#ifndef alya1.H
 
 
-void ProgramStatistika();
+
+
+void statistika();
 float Mean(float num[], int n);
 float Median(float num[], int n);
 float Modus(float num[], int n);
 
-#endif
+
 
 
 void ProgramStatistika(){
@@ -83,6 +85,7 @@ float Median(float num[], int n){
 	}
 
 
+
 float Modus(float num[], int n){
   int i, j, max=0, index=0;
   float modus;
@@ -114,3 +117,7 @@ float Modus(float num[], int n){
 
   return modus;
 }
+
+
+#endif
+
