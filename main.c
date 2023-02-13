@@ -19,6 +19,7 @@ int main (){
 	    printf("4. Operasi Aritmatika\n");
 	    printf("5. Operasi Statistika\n");
 	    printf("6. Operasi Pecahan\n");
+	    printf("7. Konversi Jarak\n");
 	    printf("0. Exit Program\n");
 	    printf("pilihan : ");
 	    scanf("%d", &pilihan);
@@ -46,6 +47,10 @@ int main (){
 			case 6: {system("cls");
 			menuPecahan();
 			break;
+			}
+			case 7:{system("cls");
+			memilih_tipe_jarak();
+				break;
 			}
 			case 0: {
 			is_on = 0;
