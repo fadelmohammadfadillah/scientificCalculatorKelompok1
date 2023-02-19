@@ -38,7 +38,7 @@ int main (){
 			break;
 			}
 			case 4: {system("cls");
-			aritmatika();
+			MenuAritmatika();
 			break;
 			}
 			case 5: {system("cls");
@@ -50,7 +50,7 @@ int main (){
 			break;
 			}
 			case 7:{system("cls");
-			memilih_tipe_jarak();
+//			memilih_tipe_jarak();
 			break;
 			}
 			case 8: {system("cls");
