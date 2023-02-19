@@ -61,8 +61,7 @@ pecahan divideP(pecahan p1, pecahan p2){
 	hasil = Sederhana(hasil);
 	return hasil;
 }
-
-pecahan input(){
+pecahan inputp(){
 	pecahan p;
 	printf("\nSilahkan input pembilang : ");
 	scanf("%d", &p.pembilang);
@@ -78,9 +77,9 @@ void output(pecahan p1){
 
 void menuPecahan(){
 	pecahan p1, p2,hasil;
-	p1 = input();
+	p1 = inputp();
 	output(p1);
-	p2 = input();
+	p2 = inputp();
 	output(p2);
 	printf("\n");
 	hasil = sumP(p1, p2);
