@@ -52,6 +52,10 @@ int main (){
 			memilih_tipe_jarak();
 				break;
 			}
+			case 8:{system("cls");
+			menuFaktorialPermutasiKombinasi();
+				break;
+			}
 			case 0: {
 			is_on = 0;
 			break;
