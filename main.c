@@ -20,6 +20,7 @@ int main (){
 	    printf("5. Operasi Statistika\n");
 	    printf("6. Operasi Pecahan\n");
 	    printf("7. Konversi Jarak\n");
+	    printf("8. Operasi Matrix\n");
 	    printf("0. Exit Program\n");
 	    printf("pilihan : ");
 	    scanf("%d", &pilihan);
@@ -50,16 +51,21 @@ int main (){
 			}
 			case 7:{system("cls");
 			memilih_tipe_jarak();
-				break;
+			break;
 			}
-			case 8:{system("cls");
+			case 8: {system("cls");
+			Matrix();
+			break;
+			}
+			case 9:{system("cls");
 			menuFaktorialPermutasiKombinasi();
-				break;
+			break;
 			}
 			case 0: {
 			is_on = 0;
 			break;
 			}
+		
 			default: {
 				printf("\n\n---Invalid Input---\n\n---Mohon Ulangi---\n");
 				system("pause");
