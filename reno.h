@@ -1,9 +1,8 @@
-#ifndef jarak_h
-#define jarak_h
+#ifndef reno_h
+#define reno_h
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "jarak.h"
 
 double kilometer, hektometer,dekameter,meter,desimeter,centimeter,milimeter;
 double celcius, fahrenheit, reamur, kelvin;
