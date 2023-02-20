@@ -15,12 +15,13 @@ int main (){
 	 	printf("Menu Kalkulator: \n");
 		printf("1. Operasi Trigonometri\n");
 		printf("2. Konversi Suhu\n");
-	    printf("3. Operasi Eksponen\n");
+	    	printf("3. Operasi Eksponen\n");
 	    printf("4. Operasi Aritmatika\n");
 	    printf("5. Operasi Statistika\n");
 	    printf("6. Operasi Pecahan\n");
 	    printf("7. Konversi Jarak\n");
 	    printf("8. Operasi Matrix\n");
+	    printf("9. Faktorial, Kombinasi dan Permutasi\n");
 	    printf("0. Exit Program\n");
 	    printf("pilihan : ");
 	    scanf("%d", &pilihan);
@@ -50,7 +51,7 @@ int main (){
 			break;
 			}
 			case 7:{system("cls");
-//			memilih_tipe_jarak();
+			memilih_tipe_jarak();
 			break;
 			}
 			case 8: {system("cls");
