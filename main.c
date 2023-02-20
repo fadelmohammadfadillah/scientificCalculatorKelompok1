@@ -22,6 +22,7 @@ int main (){
 	    printf("7. Konversi Jarak\n");
 	    printf("8. Operasi Matrix\n");
 	    printf("9. Faktorial, Kombinasi dan Permutasi\n");
+		printf("10. Konversi Massa\n");
 	    printf("0. Exit Program\n");
 	    printf("pilihan : ");
 	    scanf("%d", &pilihan);
@@ -62,6 +63,9 @@ int main (){
 			menuFaktorialPermutasiKombinasi();
 			break;
 			}
+		    case 10: {system("cls");
+			      memilih_tipe_massa();
+			      break;
 			case 0: {
 			is_on = 0;
 			break;
