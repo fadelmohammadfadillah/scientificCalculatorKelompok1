@@ -7,19 +7,85 @@
 #define adi
 
 //modul
+void menuEksponen();
+void inputAngka (int *angka, int *angka2, char *jenisEksponen);
 long pangkat(int angka, int pangkat);
 double akar(int angka, int akar);
-void inputAngka (int *angka, int *angka2, char *jenisEksponen);
-void outputPangkat(int angka, int angka2, long hasil);
-void outputAkar(int angka, int angka2, double hasil);
-void menuEksponen();
+double logBase(double angka);
+double logBase10(double angka);
 void menuFaktorialPermutasiKombinasi();
 long faktorial(long angka);
 long permutasi(long n, long r);
 long kombinasi(long n, long r);
 //end modul
 
+
 //fitur 3
+void menuEksponen(){
+	int angka = 0;
+	int angka2 = 0;
+	double inLog = 0;
+	int pilihMenu = 0;
+	long hasilPangkat = 0;
+	double hasilAkar = 0;
+	double hasilLog = 0;
+	printf("Menu\n");
+	printf("1. Pangkat\n");
+	printf("2. Akar\n");
+	printf("3. Log(Base e)\n");
+	printf("4. Log(Base 10)\n");
+	printf("5. Back to home\n");
+	printf("Silahkan pilih menu : ");
+	scanf("%d",&pilihMenu);
+	switch (pilihMenu){
+		case 1:
+			system("cls");
+			printf("Operasi pangkat\n");
+			inputAngka(&angka, &angka2,"pangkat");
+			hasilPangkat = pangkat(angka, angka2);
+			printf("Hasil dari %d pangkat %d adalah %ld\n", angka, angka2, hasilPangkat);
+			system("pause");
+			system("cls");
+			menuEksponen();
+		break;
+		case 2:
+			system("cls");
+			printf("Operasi pangkat\n");
+			inputAngka(&angka, &angka2,"akar");
+			hasilAkar = akar(angka, angka2);
+			printf("Hasil dari %d akar %d  adalah %.5f\n", angka, angka2, hasilAkar);
+			system("pause");
+			system("cls");
+			menuEksponen();
+		break;
+		case 3:
+			printf("\nMasukan angka: ");
+		    scanf("%lf", &inLog);
+			hasilLog = logBase(inLog);
+			printf ("Log (base e) dari %lf adalah %lf \n", inLog, hasilLog);
+			system("pause");
+			system("cls");
+			menuEksponen();
+		break;
+		case 4:
+			printf("\nMasukan angka: ");
+		    scanf("%lf", &inLog);
+			hasilLog = logBase10(inLog);
+			printf ("Log (base 10) dari %lf adalah %lf\n", inLog, hasilLog);
+			system("pause");
+			system("cls");
+			menuEksponen();
+		break;
+		case 5:
+			system("cls");
+			main();
+		break;
+		default:
+			printf("Kesalahan inputan!");
+		break;	
+	}
+}
+
 long pangkat(int angka, int pangkat){
 	int i;
 	int hasil = 0;
@@ -38,7 +104,6 @@ double akar(int angka, int akar){
 	return hasil;
 }
 
-
 void inputAngka (int *angka, int *angka2, char *jenisEksponen){
 	printf("Masukan angka : ");
 	scanf("%d", &(*angka));
@@ -46,60 +111,31 @@ void inputAngka (int *angka, int *angka2, char *jenisEksponen){
 	scanf("%d", &(*angka2));
 }
 
-
-void outputPangkat(int angka, int angka2, long hasil){
-	printf("Hasil dari %d pangkat %d adalah %ld\n", angka, angka2, hasil);
-	system("pause");
-	system("cls");
-	menuEksponen();
+double logBase(double angka){
+	double hasil;
+    if(angka <= 0.0){
+    	printf("Error! angka harus >= dengan 0\n");
+    }
+    else{
+	    hasil = log(angka);
+    }
+    return hasil;
 }
 
-void outputAkar(int angka, int angka2, double hasil){
-	printf("Hasil dari %d akar %d  adalah %.5f\n", angka, angka2, hasil);
-	system("pause");
-	system("cls");
-	menuEksponen();
-}
-
-void menuEksponen(){
-	int angka = 0;
-	int angka2 = 0;
-	int pilihMenu;
-	long hasilPangkat = 0;
-	double hasilAkar = 0;
-	printf("Menu\n");
-	printf("1. Pangkat\n");
-	printf("2. Akar\n");
-	printf("3. Back to home\n");
-	printf("Silahkan pilih menu : ");
-	scanf("%d",&pilihMenu);
-	switch (pilihMenu){
-		case 1:
-			system("cls");
-			printf("Operasi pangkat\n");
-			inputAngka(&angka, &angka2,"pangkat");
-			hasilPangkat = pangkat(angka, angka2);
-			outputPangkat(angka, angka2, hasilPangkat);
-		break;
-		case 2:
-			system("cls");
-			printf("Operasi pangkat\n");
-			inputAngka(&angka, &angka2,"akar");
-			hasilAkar = akar(angka, angka2);
-			outputAkar(angka, angka2, hasilAkar);
-		break;
-		case 3:
-			system("cls");
-			main();
-		break;
-		default:
-			printf("Kesalahan inputan!");
-		break;	
-	}
+double logBase10(double angka){
+	double hasil;
+    if(angka <= 0.0){
+    	printf("Error! angka harus >= dengan 0\n");
+    }
+    else{
+	    hasil = log10(angka);
+    }
+    return hasil;
 }
 //end fitur 3
 
-//fitur 8
+
+//fitur 9
 void menuFaktorialPermutasiKombinasi(){
 	int pilihMenu = 0;
 	long n, r, hasil;
@@ -182,6 +218,7 @@ long kombinasi(long n, long r){
     }
     return hasil;
 }
-//end fitur 8
+//end fitur 9
+
 
 #endif
