@@ -4,7 +4,6 @@
 #include <math.h>
 #include <conio.h>
 
-void statistika();
 float Mean(float num[], int n);
 float Median(float num[], int n);
 float Modus(float num[], int n);
@@ -16,47 +15,21 @@ int displayMatrix(int m, int n, int mattriks[10][10]);
 int addMatrix(int m, int n, int matriks1[10][10], int matriks2[10][10], int hasil[10][10]);
 int subtractMatrix(int m, int n, int matriks1[10][10], int matriks2[10][10], int hasil[10][10]);
 int multiplyMatrix(int m, int n, int p, int matriks1[10][10], int matriks2[10][10], int hasil[10][10]);
+float Inverse_Trigonometri();
 
-void ProgramStatistika(){
+float ProgramStatistika(){
 	int i,d,n;
 	float num[100];
 	
 	printf("Masukkan Jumlah Data :\n");
 	scanf("\n\n %d", &n);
-	
 	printf("Masukkan Data Anda (dipisahkan oleh enter) :\n");
-	for(i=0; i<n; i++){
+	for(i=0; i<n; i++)
+	{
 		scanf("%f", &num[i]);
 	}
 	
-	printf("Masukkan Pilihan Anda :");
-	printf("\n\t1.Mean\n");
-	printf("\n\t2.Median\n");
-	printf("\n\t3.Modus\n");
-	printf("\n\t4.Standar Deviasi\n");
-	printf("\n\t5.Variansi\n");
-	scanf("\n\n %d", &d);
-	getchar();
-	switch(d){
-		case 1: //mean
-			Mean(num, n);
-			break;
-		case 2: //Median
-			Median(num, n);
-			break;
-		case 3:
-			Modus(num, n);
-			break;
-		case 4:
-			StandarDeviasi(num, n);
-			break;
-		case 5:
-			Variansi(num, n);
-			break;
-	    default:
-            printf("Pilihan tidak tersedia\n");
-            break;
-	}
+	return Mean(num, n),Median(num, n),Modus(num, n),Variansi(num, n),StandarDeviasi(num, n);
 	}
 	
 float Mean(float num[], int n){
@@ -129,6 +102,21 @@ float Modus(float num[], int n){
   return modus;
 }
 
+float Variansi(float num[], int n) {
+    float mean = Mean(num, n);
+    float variance = 0.0;
+    int i;
+
+    for (i = 0; i < n; i++) {
+        variance += pow(num[i] - mean, 2);
+    }
+
+    variance /= n;
+
+    printf("Variansi dari data tersebut adalah: %.2f\n", variance);
+    return variance;
+}
+
 float StandarDeviasi(float num[], int n) {
     float mean = Mean(num, n);
     float variance = 0.0;
@@ -145,65 +133,41 @@ float StandarDeviasi(float num[], int n) {
     return sd;
 }
 
-float Variansi(float num[], int n) {
-    float mean = Mean(num, n);
-    float variance = 0.0;
-    int i;
-
-    for (i = 0; i < n; i++) {
-        variance += pow(num[i] - mean, 2);
-    }
-
-    variance /= n;
-
-    printf("Variansi dari data tersebut adalah: %.2f\n", variance);
-    return variance;
-}
-
 int Matrix(){
-	int i, j, m, n, p, choice;
+	int i, j, m, n, p;
 	int matriks1[10][10], matriks2[10][10],hasil[10][10];
 	char repeat='Y';
-	
   do{
-  
   //diasumsikan dimensi matrix satu dan dua sama
 
   printf("Masukkan jumlah baris matriks (max 10) : ");
   scanf("%d", &m);
   printf("Masukkan jumlah kolom matriks (max 10) : ");
   scanf("%d", &n);
-
+  
 	inputMatrix(m, n, matriks1);
 	inputMatrix(m, n, matriks2);
-
-  printf("Pilih operasi matrix: \n");
-  printf("1. Penjumlahan \n");
-  printf("2. Pengurangan \n");
-  printf("3. Perkalian \n");
-  scanf("%d", &choice);
-  getchar();
-  switch (choice){
-  	case 1:
   		addMatrix(m, n, matriks1, matriks2, hasil);
   		printf("Hasil penjumlahan: \n");
   		displayMatrix(m, n, hasil);
-  		break;
-  	case 2:
+  
   		subtractMatrix(m, n, matriks1, matriks2, hasil);
   		printf("Hasil pengurangan: \n");
   		displayMatrix(m, n, hasil);
-  		break;
-  	case 3:
-  		printf("Masukkan jumlah kolom matrix kedua: ");
+  	
+  		printf("Jumlah kolom matriks pertama harus sama dengan jumlah baris matrix kedua\n");
+  		printf("Masukkan jumlah baris matrix kedua: \n");
   		scanf("%d", &p);
+  		
+  		if(n != p){
+  			printf("Tidak dapat melakukan perkalian\n\n\n");
+		  }
+		else {
   		multiplyMatrix(m, n, p, matriks1, matriks2, hasil);
   		printf("Hasil perkalian: \n");
   		displayMatrix(m, p, hasil);
-  		break;
-  	default:
-  		printf("Pilihan tidak valid");
-  }
+  	}
+  	
   printf("Apakah anda ingin menjalankan program lagi (Y/T)");
   getchar();
   scanf("%c", &repeat);
@@ -211,6 +175,7 @@ int Matrix(){
 while (repeat == 'Y' || repeat == 'y');
 system("pause");
 system("cls");
+main();
 	return 0;
 }
 
@@ -287,5 +252,31 @@ int multiplyMatrix(int m, int n, int p, int matriks1[10][10], int matriks2[10][1
   return 0;
 }
 
+float Inverse_Trigonometri(){
+	float angka,Isin,Icos,Itan;
+	printf("Masukkan nilai (Radian); ");
+	scanf("%f", &angka);
+	Isin = asin(angka);
+	Icos = acos(angka);
+	Itan = atan(angka);
+	//untuk sin
+	printf("Radian sin(%.3f) = %3f\n",angka,Isin);
+	Isin = (Isin*180)/3.14;
+	printf("Degree sin(%.3f) = %.3f\n",angka,Isin);
+	//untuk cos
+	printf("Radian cos(%.3f) = %3f\n",angka,Icos);
+	Icos = (Icos*180)/3.14;
+	printf("Degree cos(%.3f) = %.3f\n",angka,Icos);
+	//untuk tan
+	printf("Radian tan(%.3f) = %3f\n",angka,Itan);
+ 	Itan = (Itan*180)/3.14;
+    printf("Degree tan(%.3f) = %.3f\n",angka,Itan);
+	
+	system("pause");
+	system("cls");
+	main();		
+	return 0;
+}
 #endif
+
 

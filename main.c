@@ -14,15 +14,16 @@ int main (){
 		int pilihan;
 	 	printf("Menu Kalkulator: \n");
 		printf("1. Operasi Trigonometri\n");
-		printf("2. Konversi Suhu\n");
-	    	printf("3. Operasi Eksponen\n");
-	    printf("4. Operasi Aritmatika\n");
-	    printf("5. Operasi Statistika\n");
-	    printf("6. Operasi Pecahan\n");
-	    printf("7. Konversi Jarak\n");
-	    printf("8. Operasi Matrix\n");
-	    printf("9. Faktorial, Kombinasi dan Permutasi\n");
-		printf("10. Konversi Massa\n");
+		printf("2. Operasi Invers Trigonometri\n");
+		printf("3. Konversi Suhu\n");
+	    printf("4. Operasi Eksponen\n");
+	    printf("5. Operasi Aritmatika\n");
+	    printf("6. Operasi Statistika\n");
+	    printf("7. Operasi Pecahan\n");
+	    printf("8. Konversi Jarak\n");
+	    printf("9. Operasi Matrix\n");
+	    printf("10. Faktorial, Kombinasi dan Permutasi\n");
+		printf("11. Konversi Massa\n");
 	    printf("0. Exit Program\n");
 	    printf("pilihan : ");
 	    scanf("%d", &pilihan);
@@ -32,38 +33,42 @@ int main (){
 			break;
 			}
 			case 2: {system("cls");
-			menu_pilih_tipe_suhu ();
+			Inverse_Trigonometri();
 			break;
 			}
 			case 3: {system("cls");
-			menuEksponen();
+			menu_pilih_tipe_suhu ();
 			break;
 			}
 			case 4: {system("cls");
-			MenuAritmatika();
+			menuEksponen();
 			break;
 			}
 			case 5: {system("cls");
-			ProgramStatistika();
+			MenuAritmatika();
 			break;
 			}
 			case 6: {system("cls");
+			ProgramStatistika();
+			break;
+			}
+			case 7: {system("cls");
 			menuPecahan();
 			break;
 			}
-			case 7:{system("cls");
+			case 8:{system("cls");
 			memilih_tipe_jarak();
 			break;
 			}
-			case 8: {system("cls");
+			case 9: {system("cls");
 			Matrix();
 			break;
 			}
-			case 9:{system("cls");
+			case 10:{system("cls");
 			menuFaktorialPermutasiKombinasi();
 			break;
 			}
-		    case 10: {system("cls");
+		    case 11: {system("cls");
 			      memilih_tipe_massa();
 			      break;
 			case 0: {
@@ -81,4 +86,6 @@ int main (){
 		}
 	}
     return 0;
+}
+
 }
