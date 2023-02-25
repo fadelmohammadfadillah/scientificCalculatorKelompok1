@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <conio.h>
+#define PI 3.14159
 
 float Mean(float num[], int n);
 float Median(float num[], int n);
@@ -250,6 +251,16 @@ int multiplyMatrix(int m, int n, int p, int matriks1[10][10], int matriks2[10][1
     }
   }
   return 0;
+}
+
+double Inverse_Sin(double angka){
+	return asin(angka)*180/PI;
+}
+double Inverse_Cos(double angka){
+	return acos(angka)*180/PI;
+}
+double Inverse_Tan(double angka){
+	return atan(angka)*180/PI;
 }
 
 float Inverse_Trigonometri(){

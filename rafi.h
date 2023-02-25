@@ -4,13 +4,16 @@
 #include <math.h>
 #define PI 3.14159
 
-double HitungSin(double rad){
+double HitungSin(double derajat){
+	double rad =derajat * PI / 180;
     return sin(rad);
 }
-double HitungCos(double rad){
+double HitungCos(double derajat){
+	double rad =derajat * PI / 180;
     return cos(rad);
 }
-double HitungTan(double rad){
+double HitungTan(double derajat){
+	double rad =derajat * PI / 180;
     return tan(rad);
 }
 void MenuTrigonometri(){

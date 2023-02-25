@@ -8,6 +8,16 @@ double kilometer, hektometer,dekameter,meter,desimeter,centimeter,milimeter;
 double celcius, fahrenheit, reamur, kelvin;
 int pilih;
 double kilogram,hektogram,dekagram,gram,desigram,centigram,miligram;
+void tampil_hasil_konversi_celcius();
+void tampil_hasil_konversi_fahrenheit();
+void tampil_hasil_konversi_mg();
+void konversi_mg();
+void tampil_hasil_konversi_cg();
+void konversi_cg();
+void tampil_hasil_konversi_dg();
+void konversi_dg();
+
+
 
 double celcius_to_reamur(double celcius){
 	return (celcius * 4 / 5);
