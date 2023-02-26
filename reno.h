@@ -1,61 +1,123 @@
 #ifndef reno_h
+#define reno_h
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
-#include <conio.h>
+#include <math.h>
 
 double kilometer, hektometer,dekameter,meter,desimeter,centimeter,milimeter;
 double celcius, fahrenheit, reamur, kelvin;
 int pilih;
+double kilogram,hektogram,dekagram,gram,desigram,centigram,miligram;
+void tampil_hasil_konversi_celcius();
+void tampil_hasil_konversi_reamur();
+void tampil_hasil_konversi_kelvin();
+void tampil_hasil_konversi_fahrenheit();
+void tampil_hasil_konversi_Km();
+void tampil_hasil_konversi_Hm();
+void tampil_hasil_konversi_dam();
+void tampil_hasil_konversi_m();
+void tampil_hasil_konversi_dm();
+void tampil_hasil_konversi_cm();
+void tampil_hasil_konversi_mm();
+void tampil_hasil_konversi_Kg();
+void tampil_hasil_konversi_Hg();
+void tampil_hasil_konversi_dag();
+void tampil_hasil_konversi_g();
+void tampil_hasil_konversi_mg();
+void tampil_hasil_konversi_cg();
+void tampil_hasil_konversi_dg();
+void konversi_km();
+void konversi_hm();
+void konversi_dam();
+void konversi_m();
+void konversi_dm();
+void konversi_cm();
+void konversi_mm();
+void konversi_kg();
+void konversi_hg();
+void konversi_g();
+void konversi_dag();
+void konversi_dg();
+void konversi_cg();
+void konversi_mg();
 
 
+
+
+//modul untuk log natural dengan parameter bertipe double
+double logBase(double angka){
+	double hasil;
+    if(angka <= 0.0){
+    	printf("Error! angka harus >= dengan 0\n");
+    }
+    else{
+	    hasil = log(angka);
+    }
+    return hasil;
+}
+
+//konversi celcius ke reamur dengan mengembalikan nilai celcius
 double celcius_to_reamur(double celcius){
 	return (celcius * 4 / 5);
 }
 
+//konversi celcius ke fahrenheit dengan mengembalikan nilai celcius
 double celcius_to_fahrenheit(double celcius){
 
 	return ((celcius * 9/5) + 32);
 }
 
+//konversi celcius ke kelvin dengan mengembalikan nilai celcius
 double celcius_to_kelvin(double celcius){
 	return (celcius + 273.15);
 }
 
+//konversi nilai fahrenheit ke celcius dengan mengembalikan nilai fahrenheit
 double fahrenheit_to_celcius(double fahrenheit){
 	return ((fahrenheit * 5 / 9) + 32);
 }
 
+//konnversi nilai fahrenheit ke reamur dengan mengembalikan nilai fahrenheit
 double fahrenheit_to_reamur(double fahrenheit){
 	return ((fahrenheit * 4/9 )+32);
 }
 
+//konversi nilai fahrenheit ke kelvin dengan mengembalikan nilai fahrenheit
 double fahrenheit_to_kelvin (double fahrenheit){
 	return ((fahrenheit + 459.67)*(5/9));
 }
 
+//konversi reamur ke celcius dengan mengembalikan nilai reamur
 double reamur_to_celcius (double reamur){
 	return (reamur*5/4);
 }
 
+//konversi nilai reamur ke fahrenheit dengan mengembalikan nilai reamur
 double reamur_to_fahrenheit(double reamur){
 	return ((reamur * 9/4)+32);
 }
 
+//konversi nilai reamur ke kelvin dengan mengembalikan nilai reamur
 double reamur_to_kelvin(double reamur){
 	return ((reamur * 5/4)+273.15);
 }
 
+//konversi nilai kelvin ke celcius dengan mengembalikan nilai kelvin
 double kelvin_to_celcius(double kelvin){
 	return  (kelvin - 273);
 }
 
+//konversi nilai kelvin ke reamur dengan mengembalikan nilai kelvin
 double kelvin_to_reamur(double kelvin){
-	return (4/5 (kelvin-273));
+	return ((kelvin-273) * 0.8);
 }
 
+//konversi nilai kelvin ke fahrenheit dengan mengembalikan nilai kelvin
 double kelvin_to_fahrenheit(double kelvin){
-	return (9/5 (kelvin-273) + 32);
+	return ((kelvin-273)*(1.8) + 32);
 }
+
 
 void menu_pilih_celcius (){
 	printf("Masukkan nilai celcius : ");
@@ -65,6 +127,7 @@ void menu_pilih_celcius (){
 	tampil_hasil_konversi_celcius();
 }
 
+//modul untuk menampilkan hasil konversi celcius
 void tampil_hasil_konversi_celcius() {
 	int pilih;
 	double hasil_konversi;
@@ -95,6 +158,7 @@ void menu_pilih_fahrenheit(){
 	tampil_hasil_konversi_fahrenheit();
 }
 
+//modul tampil hasil konversi fahrenheit
 void tampil_hasil_konversi_fahrenheit(){
 	int pilih;
 	double hasil_konversi;
@@ -789,6 +853,593 @@ void tampil_hasil_konversi_mm(){
 		break;
 	}
 }
+
+
+//konversi kg ke hg
+double kg_to_hg(double kilogram){
+	return (kilogram * 10);	
+}
+
+//konversi kg ke dag 
+double kg_to_dag(double kilogram){
+	return (kilogram *100);
+}
+
+//konversi kg ke g
+double kg_to_g(double kilogram){
+	return (kilogram * 1000);
+}
+
+//konversi kg ke dg 
+double kg_to_dg(double kilogram){
+	return (kilogram * 10000);
+}
+
+//konversi kg ke cg
+double kg_to_cg(double kilogram){
+	return (kilogram * 100000);
+}
+
+//konversi kg ke mg 
+double kg_to_mg(double kilogram){
+	return (kilogram * 1000000);
+}
+
+
+//konversi hg ke kg
+double hg_to_kg(double hektogram){
+	return (hektogram / 10);
+}
+
+//konversi hg ke dag
+double hg_to_dag(double hektogram){
+	return (hektogram * 10);
+}
+
+//konversi hg ke g
+double hg_to_g(double hektogram){
+	return (hektogram * 100);
+}
+
+//konversi hg ke dg
+double hg_to_dg(double hektogram){
+	return (hektogram * 1000);
+}
+
+//konversi hg ke cg
+double hg_to_cg(double hektogram){
+	return (hektogram * 10000);
+}
+
+//konversi hg ke mg
+double hg_to_mg(double hektogram){
+	return (hektogram * 100000);
+}
+
+
+//konversi dag ke kg
+double dag_to_kg(double dekagram){
+	return (dekagram / 100);
+}
+
+//konversi dag ke hg
+double dag_to_hg(double dekagram){
+	return (dekagram / 10);
+}
+
+//konversi dag ke g
+double dag_to_g(double dekagram){
+	return (dekagram * 10);
+}
+
+//konversi dag ke dg
+double dag_to_dg(double dekagram){
+	return (dekagram * 100);
+}
+
+//konversi dag ke cg
+double dag_to_cg(double dekagram){
+	return (dekagram * 1000);
+}
+
+//konversi dag ke mg
+double dag_to_mg(double dekagram){
+	return (dekagram * 10000);
+}
+
+//konversi g ke kg
+double g_to_kg(double gram){
+	return (gram / 1000);
+}
+
+//konversi g ke hg
+double g_to_hg(double gram){
+	return (gram / 100);
+}
+
+//konversi g ke dag
+double g_to_dag(double gram){
+	return (gram / 10);
+}
+
+//konversi g ke dg
+double g_to_dg(double gram){
+	return (gram * 10);
+}
+
+//konversi g ke cg
+double g_to_cg(double gram){
+	return (gram * 100);
+}
+
+//konversi g ke mg
+double g_to_mg(double gram){
+	return (gram * 1000);
+}
+
+//konversi dg ke kg
+double dg_to_kg(double desigram){
+	return (desigram / 10000);
+}
+
+//konversi dg ke hg
+double dg_to_hg(double desigram){
+	return (desigram / 1000);
+}
+
+//konversi dg ke dag
+double dg_to_dag(double desigram){
+	return (desigram / 100);
+}
+
+//konversi dg ke g
+double dg_to_g(double desigram){
+	return (desigram / 10);
+}
+
+//konversi dg ke cg
+double dg_to_cg(double desigram){
+	return (desigram * 10);
+}
+
+//konversi dg ke mg
+double dg_to_mg(double desigram){
+	return (desigram * 100);
+}
+
+//konversi cg ke kg
+double cg_to_kg(double centigram){
+	return (centigram / 100000);
+}
+
+//konversi cg ke hg
+double cg_to_hg(double centigram){
+	return (centigram / 10000);
+}
+
+//konversi cg ke dag
+double cg_to_dag(double centigram){
+	return (centigram / 1000);
+}
+
+//konversi cg ke g
+double cg_to_g(double centigram){
+	return (centigram / 100);
+}
+
+//konversi cg ke dg
+double cg_to_dg(double centigram){
+	return (centigram / 10);
+}
+
+//konversi cg ke mg
+double cg_to_mg(double centigram){
+	return (centigram * 10);
+}
+
+//konversi mg ke kg
+double mg_to_kg(double miligram){
+	return (miligram / 1000000);
+}
+
+//konversi mg ke hg
+double mg_to_hg(double miligram){
+	return (miligram / 100000);
+}
+
+//konversi mg ke dag
+double mg_to_dag(double miligram){
+	return (miligram / 10000);
+}
+
+//konversi mg ke g
+double mg_to_g(double miligram){
+	return (miligram / 1000);
+}
+
+//konversi mg ke dg
+double mg_to_dg(double miligram){
+	return (miligram / 100);
+}
+
+//konversi mg ke cg
+double mg_to_cg(double miligram){
+	return (miligram / 10);
+}
+
+void memilih_tipe_massa(){
+	int pilihan;
+	printf("!!!Note!!!\nTanda '.' (titik) menunjukan koma bukan sebagai pembatas satuan, puluhan, ribuan dst.\n\n");
+	printf("Pilih konversi : \n");
+	printf("1. Kilogram\n");
+	printf("2. Hektogram\n");
+	printf("3. Dekagram\n");
+	printf("4. gram\n");
+	printf("5. Desigram\n");
+	printf("6. Centigram\n");
+	printf("7. Miligram\n");
+	printf("Masukkan Pilihan : ");
+	scanf("%d", &pilihan);
+	
+	switch(pilihan){
+		case 1:
+			konversi_kg();
+			break;
+		case 2:
+			konversi_hg();
+			break;
+		case 3:
+			konversi_dag();
+			break;
+		case 4:
+			konversi_g();
+			break;
+		case 5:
+			konversi_dg();
+			break;
+		case 6:
+			konversi_cg();
+			break;
+		case 7:
+			konversi_mg();
+			break;
+		defaults:
+			printf("pilihan tidak tersedia");
+		}
+	}
+	
+void konversi_kg(){
+	printf("\nSilahkan masukkan nilai Kilogram terlebih dahulu\n");
+	printf("Nilai Kilogram : ");
+	scanf("%lf", &kilogram);
+	printf("Pilih konversi Kg ke : \n");
+	printf("1. Hg\n");
+	printf("2. Dag\n");
+	printf("3. g\n");
+	printf("4. Dg\n");
+	printf("5. Cg\n");
+	printf("6. Mg\n");
+	tampil_hasil_konversi_Kg();
+}
+
+void tampil_hasil_konversi_Kg(double massa){
+	int pilih;
+	double hasil_konversi;
+	printf("Pilihan: ");
+	scanf("%d", &pilih);
+	switch(pilih){
+		case 1: 
+			hasil_konversi = kg_to_hg(kilogram);
+			printf("Hasil konversinya adalah %.3lf Kg = %.2lf Hg", kilogram, hasil_konversi);
+		break;
+		case 2: 
+			hasil_konversi = kg_to_dag(kilogram);
+			printf("Hasil konversinya adalah %.3lf Kg = %.2lf Dkg", kilogram, hasil_konversi);
+		break;
+		case 3:
+			hasil_konversi = kg_to_g(kilogram);
+			printf("Hasil konversinya adalah %.3lf Kg = %.2lf G", kilogram, hasil_konversi);
+		break;
+		case 4:
+			hasil_konversi = kg_to_dg(kilogram);
+			printf("Hasil konversinya adalah %.3lf Kg = %.2lf Dg", kilogram, hasil_konversi);
+		break;
+		case 5:
+			hasil_konversi = kg_to_cg(kilogram);
+			printf("Hasil konversinya adalah %.3lf Kg = %.2lf Cg", kilogram, hasil_konversi);
+		break;
+		case 6:
+			hasil_konversi = kg_to_mg(kilogram);
+			printf("Hasil konversinya adalah %.3lf Kg = %.2lf Mg", kilogram, hasil_konversi);
+		break;
+	}
+}
+
+void konversi_hg(){
+	printf("\nSilahkan masukkan nilai Hektogram terlebih dahulu\n");
+	printf("Nilai Hektogram : ");
+	scanf("%lf", &hektogram);
+	printf("Pilih konversi Hg ke : \n");
+	printf("1. Kg\n");
+	printf("2. Dag\n");
+	printf("3. G\n");
+	printf("4. Dg\n");
+	printf("5. Cg\n");
+	printf("6. Mg\n");
+	tampil_hasil_konversi_Hg();
+}
+
+void tampil_hasil_konversi_Hg(){
+	int pilih;
+	double hasil_konversi;
+	printf("Pilihan: ");
+	scanf("%d", &pilih);
+	switch(pilih){
+		case 1: 
+			hasil_konversi = hg_to_kg(hektogram);
+			printf("Hasil konversinya adalah %.3lf Hg = %.3lf Kg", hektogram, hasil_konversi);
+		break;
+		case 2: 
+			hasil_konversi = hg_to_dag(hektogram);
+			printf("Hasil konversinya adalah %.3lf Hg = %.3lf Dag", hektogram, hasil_konversi);
+		break;
+		case 3:
+			hasil_konversi = hg_to_g(hektogram);
+			printf("Hasil konversinya adalah %.3lf Hg = %.3lf G", hektogram, hasil_konversi);
+		break;
+		case 4:
+			hasil_konversi = hg_to_dg(hektogram);
+			printf("Hasil konversinya adalah %.3lf Hg = %.3lf Dg", hektogram, hasil_konversi);
+		break;
+		case 5:
+			hasil_konversi = hg_to_cg(hektogram);
+			printf("Hasil konversinya adalah %.3lf Hg = %.3lf Cg", hektogram, hasil_konversi);
+		break;
+		case 6:
+			hasil_konversi = hg_to_mg(hektogram);
+			printf("Hasil konversinya adalah %.3lf Hg = %.3lf Mg", hektogram, hasil_konversi);
+		break;
+	}
+}
+
+void konversi_dag(){
+	printf("\nSilahkan masukkan nilai Dekagram terlebih dahulu\n");
+	printf("Nilai Dekagram : ");
+	scanf("%lf", &dekagram);
+	printf("Pilih konversi Dag ke : \n");
+	printf("1. Kg\n");
+	printf("2. Hg\n");
+	printf("3. G\n");
+	printf("4. Dg\n");
+	printf("5. Cg\n");
+	printf("6. Mg\n");
+	tampil_hasil_konversi_dag();
+}
+
+void tampil_hasil_konversi_dag(){
+	int pilih;
+	double hasil_konversi;
+	printf("Pilihan: ");
+	scanf("%d", &pilih);
+	switch(pilih){
+		case 1: 
+			hasil_konversi = dag_to_kg(dekagram);
+			printf("Hasil konversinya adalah %.3lf Dam = %.3lf Km", dekagram, hasil_konversi);
+		break;
+		case 2: 
+			hasil_konversi = dag_to_hg(dekagram);
+			printf("Hasil konversinya adalah %.3lf Dam = %.3lf Hm", dekagram, hasil_konversi);
+		break;
+		case 3:
+			hasil_konversi = dag_to_g(dekagram);
+			printf("Hasil konversinya adalah %.3lf Dam = %.33lf M", dekagram, hasil_konversi);
+		break;
+		case 4:
+			hasil_konversi = dag_to_mg(dekagram);
+			printf("Hasil konversinya adalah %.3lf Dam = %.3lf Dm", dekagram, hasil_konversi);
+		break;
+		case 5:
+			hasil_konversi = dag_to_mg(dekagram);
+			printf("Hasil konversinya adalah %.3lf Dam = %.3lf Cm", dekagram, hasil_konversi);
+		break;
+		case 6:
+			hasil_konversi = dag_to_mg(dekagram);
+			printf("Hasil konversinya adalah %.3lf Dam = %.3lf MM", dekagram, hasil_konversi);
+		break;
+	}
+}
+
+void konversi_g(){
+	printf("\nSilahkan masukkan nilai gram terlebih dahulu\n");
+	printf("Nilai gram : ");
+	scanf("%lf", &gram);
+	printf("Pilih konversi g ke : \n");
+	printf("1. Kg\n");
+	printf("2. Hg\n");
+	printf("3. Dag\n");
+	printf("4. Dg\n");
+	printf("5. Cg\n");
+	printf("6. Mg\n");
+	tampil_hasil_konversi_g();
+}
+
+void tampil_hasil_konversi_g(){
+	int pilih;
+	double hasil_konversi;
+	printf("Pilihan: ");
+	scanf("%d", &pilih);
+	switch(pilih){
+		case 1: 
+			hasil_konversi = g_to_kg(gram);
+			printf("Hasil konversinya adalah %.3lf g = %.3lf Kg", gram, hasil_konversi);
+		break;
+		case 2: 
+			hasil_konversi = g_to_hg(gram);
+			printf("Hasil konversinya adalah %.3lf g = %.3lf Hg", gram, hasil_konversi);
+		break;
+		case 3:
+			hasil_konversi = g_to_dag(gram);
+			printf("Hasil konversinya adalah %.3lf g = %.3lf Dag", gram, hasil_konversi);
+		break;
+		case 4:
+			hasil_konversi = g_to_dg(gram);
+			printf("Hasil konversinya adalah %.3lf g = %.3lf Dg", gram, hasil_konversi);
+		break;
+		case 5:
+			hasil_konversi = g_to_cg(gram);
+			printf("Hasil konversinya adalah %.3lf g = %.3lf Cg", gram, hasil_konversi);
+		break;
+		case 6:
+			hasil_konversi = g_to_mg(gram);
+			printf("Hasil konversinya adalah %.3lf g = %.3lf Mg", gram, hasil_konversi);
+		break;
+	}
+}
+
+void konversi_dg(){
+	printf("\nSilahkan masukkan nilai Desigram terlebih dahulu\n");
+	printf("Nilai Desigram : ");
+	scanf("%lf", &desigram);
+	printf("Pilih konversi Dg ke : \n");
+	printf("1. Kg\n");
+	printf("2. Hg\n");
+	printf("3. Dag\n");
+	printf("4. G\n");
+	printf("5. Cg\n");
+	printf("6. Mg\n");
+	tampil_hasil_konversi_dg();
+}
+
+void tampil_hasil_konversi_dg(){
+	int pilih;
+	double hasil_konversi;
+	printf("Pilihan: ");
+	scanf("%d", &pilih);
+	switch(pilih){
+		case 1: 
+			hasil_konversi = dg_to_kg(desigram);
+			printf("Hasil konversinya adalah %.3lf Dg = %.3lf Kg", desigram, hasil_konversi);
+		break;
+		case 2: 
+			hasil_konversi = dg_to_hg(desigram);
+			printf("Hasil konversinya adalah %.3lf Dg = %.3lf Hg", desigram, hasil_konversi);
+		break;
+		case 3:
+			hasil_konversi = dg_to_dag(desigram);
+			printf("Hasil konversinya adalah %.3lf Dg = %.3lf Dag", desigram, hasil_konversi);
+		break;
+		case 4:
+			hasil_konversi = dg_to_g(desigram);
+			printf("Hasil konversinya adalah %.3lf Dg = %.3lf G", desigram, hasil_konversi);
+		break;
+		case 5:
+			hasil_konversi = dg_to_cg(desigram);
+			printf("Hasil konversinya adalah %.3lf Dg = %.3lf Cg", desigram, hasil_konversi);
+		break;
+		case 6:
+			hasil_konversi = dg_to_mg(desigram);
+			printf("Hasil konversinya adalah %.3lf Dg = %.3lf Mg", desigram, hasil_konversi);
+		break;
+	}
+}
+
+
+void konversi_cg(){
+	printf("\nSilahkan masukkan nilai Centigram terlebih dahulu\n");
+	printf("Nilai Centigram : ");
+	scanf("%lf", &centigram);
+	printf("Pilih konversi Cg ke : \n");
+	printf("1. Kg\n");
+	printf("2. Hg\n");
+	printf("3. Dag\n");
+	printf("4. G\n");
+	printf("5. Dg\n");
+	printf("6. Mg\n");
+	tampil_hasil_konversi_cg();
+}
+
+void tampil_hasil_konversi_cg(){
+	int pilih;
+	double hasil_konversi;
+	printf("Pilihan: ");
+	scanf("%d", &pilih);
+	switch(pilih){
+		case 1: 
+			hasil_konversi = cg_to_kg(centigram);
+			printf("Hasil konversinya adalah %.3lf Cm = %.3lf Km", centigram, hasil_konversi);
+		break;
+		case 2: 
+			hasil_konversi = cg_to_kg(centigram);
+			printf("Hasil konversinya adalah %.3lf Cm = %.3lf Hm", centigram, hasil_konversi);
+		break;
+		case 3:
+			hasil_konversi = cg_to_dag(centigram);
+			printf("Hasil konversinya adalah %.3lf Cm = %.3lf Dam", centigram, hasil_konversi);
+		break;
+		case 4:
+			hasil_konversi = cg_to_g(centigram);
+			printf("Hasil konversinya adalah %.3lf Cm = %.3lf M", centigram, hasil_konversi);
+		break;
+		case 5:
+			hasil_konversi = cg_to_dg(centigram);
+			printf("Hasil konversinya adalah %.3lf Cm = %.3lf Dm", centigram, hasil_konversi);
+		break;
+		case 6:
+			hasil_konversi = cg_to_mg(centigram);
+			printf("Hasil konversinya adalah %.3lf Cm = %.3lf MM", centigram, hasil_konversi);
+		break;
+	}
+}
+
+
+void konversi_mg(){
+	printf("\nSilahkan masukkan nilai Miligram terlebih dahulu\n");
+	printf("Nilai Miligram : ");
+	scanf("%lf", &miligram);
+	printf("Pilih konversi mg ke : \n");
+	printf("1. Kg\n");
+	printf("2. Hg\n");
+	printf("3. Dag\n");
+	printf("4. G\n");
+	printf("5. Dg\n");
+	printf("6. Cg\n");
+	tampil_hasil_konversi_mg();
+}
+
+void tampil_hasil_konversi_mg(){
+	int pilih;
+	double hasil_konversi;
+	printf("Pilihan: ");
+	scanf("%d", &pilih);
+	switch(pilih){
+		case 1: 
+			hasil_konversi = mg_to_kg(miligram);
+			printf("Hasil konversinya adalah %.3lf mg = %.3lf kg", miligram, hasil_konversi);
+		break;
+		case 2: 
+			hasil_konversi = mg_to_hg(miligram);
+			printf("Hasil konversinya adalah %.3lf mg = %.3lf Hg", miligram, hasil_konversi);
+		break;
+		case 3:
+			hasil_konversi = mg_to_dag(miligram);
+			printf("Hasil konversinya adalah %.3lf mg = %.3lf Dag", miligram, hasil_konversi);
+		break;
+		case 4:
+			hasil_konversi = mg_to_g(miligram);
+			printf("Hasil konversinya adalah %.3lf mg = %.3lf g", miligram, hasil_konversi);
+		break;
+		case 5:
+			hasil_konversi = mg_to_dg(miligram);
+			printf("Hasil konversinya adalah %.3lf mg = %.3lf dg", miligram, hasil_konversi);
+		break;
+		case 6:
+			hasil_konversi = mg_to_cg(miligram);
+			printf("Hasil konversinya adalah %.3lf mg = %.3lf cg", miligram, hasil_konversi);
+		break;
+	}
+}
+
+
 
 
 #endif
