@@ -5,11 +5,13 @@
 #include <stdlib.h>
 #include <math.h>
 
+
 double kilometer, hektometer,dekameter,meter,desimeter,centimeter,milimeter;
 double celcius, fahrenheit, reamur, kelvin;
 int pilih;
 double kilogram,hektogram,dekagram,gram,desigram,centigram,miligram;
 void tampil_hasil_konversi_celcius();
+
 void tampil_hasil_konversi_reamur();
 void tampil_hasil_konversi_kelvin();
 void tampil_hasil_konversi_fahrenheit();
@@ -41,6 +43,7 @@ void konversi_dag();
 void konversi_dg();
 void konversi_cg();
 void konversi_mg();
+
 
 
 
@@ -88,25 +91,31 @@ double fahrenheit_to_kelvin (double fahrenheit){
 	return ((fahrenheit + 459.67)*(5/9));
 }
 
+
 //konversi reamur ke celcius dengan mengembalikan nilai reamur
+
 double reamur_to_celcius (double reamur){
 	return (reamur*5/4);
 }
+
 
 //konversi nilai reamur ke fahrenheit dengan mengembalikan nilai reamur
 double reamur_to_fahrenheit(double reamur){
 	return ((reamur * 9/4)+32);
 }
 
+
 //konversi nilai reamur ke kelvin dengan mengembalikan nilai reamur
 double reamur_to_kelvin(double reamur){
 	return ((reamur * 5/4)+273.15);
 }
 
+
 //konversi nilai kelvin ke celcius dengan mengembalikan nilai kelvin
 double kelvin_to_celcius(double kelvin){
 	return  (kelvin - 273);
 }
+
 
 //konversi nilai kelvin ke reamur dengan mengembalikan nilai kelvin
 double kelvin_to_reamur(double kelvin){
@@ -119,6 +128,10 @@ double kelvin_to_fahrenheit(double kelvin){
 }
 
 
+double kelvin_to_fahrenheit(double kelvin){
+	return ((kelvin-273)*(1.8) + 32);
+}
+
 void menu_pilih_celcius (){
 	printf("Masukkan nilai celcius : ");
 	scanf("%lf", &celcius);
@@ -126,6 +139,7 @@ void menu_pilih_celcius (){
 	printf("1. Reamur\n2. Fahrenheit\n3. kelvin");
 	tampil_hasil_konversi_celcius();
 }
+
 
 //modul untuk menampilkan hasil konversi celcius
 void tampil_hasil_konversi_celcius() {
