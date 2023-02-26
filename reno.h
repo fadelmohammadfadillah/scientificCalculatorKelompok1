@@ -3,66 +3,130 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
+
 
 double kilometer, hektometer,dekameter,meter,desimeter,centimeter,milimeter;
 double celcius, fahrenheit, reamur, kelvin;
 int pilih;
 double kilogram,hektogram,dekagram,gram,desigram,centigram,miligram;
 void tampil_hasil_konversi_celcius();
+
+void tampil_hasil_konversi_reamur();
+void tampil_hasil_konversi_kelvin();
 void tampil_hasil_konversi_fahrenheit();
+void tampil_hasil_konversi_Km();
+void tampil_hasil_konversi_Hm();
+void tampil_hasil_konversi_dam();
+void tampil_hasil_konversi_m();
+void tampil_hasil_konversi_dm();
+void tampil_hasil_konversi_cm();
+void tampil_hasil_konversi_mm();
+void tampil_hasil_konversi_Kg();
+void tampil_hasil_konversi_Hg();
+void tampil_hasil_konversi_dag();
+void tampil_hasil_konversi_g();
 void tampil_hasil_konversi_mg();
-void konversi_mg();
 void tampil_hasil_konversi_cg();
-void konversi_cg();
 void tampil_hasil_konversi_dg();
+void konversi_km();
+void konversi_hm();
+void konversi_dam();
+void konversi_m();
+void konversi_dm();
+void konversi_cm();
+void konversi_mm();
+void konversi_kg();
+void konversi_hg();
+void konversi_g();
+void konversi_dag();
 void konversi_dg();
+void konversi_cg();
+void konversi_mg();
 
 
 
+
+
+//modul untuk log natural dengan parameter bertipe double
+double logBase(double angka){
+	double hasil;
+    if(angka <= 0.0){
+    	printf("Error! angka harus >= dengan 0\n");
+    }
+    else{
+	    hasil = log(angka);
+    }
+    return hasil;
+}
+
+//konversi celcius ke reamur dengan mengembalikan nilai celcius
 double celcius_to_reamur(double celcius){
 	return (celcius * 4 / 5);
 }
 
+//konversi celcius ke fahrenheit dengan mengembalikan nilai celcius
 double celcius_to_fahrenheit(double celcius){
 
 	return ((celcius * 9/5) + 32);
 }
 
+//konversi celcius ke kelvin dengan mengembalikan nilai celcius
 double celcius_to_kelvin(double celcius){
 	return (celcius + 273.15);
 }
 
+//konversi nilai fahrenheit ke celcius dengan mengembalikan nilai fahrenheit
 double fahrenheit_to_celcius(double fahrenheit){
 	return ((fahrenheit * 5 / 9) + 32);
 }
 
+//konnversi nilai fahrenheit ke reamur dengan mengembalikan nilai fahrenheit
 double fahrenheit_to_reamur(double fahrenheit){
 	return ((fahrenheit * 4/9 )+32);
 }
 
+//konversi nilai fahrenheit ke kelvin dengan mengembalikan nilai fahrenheit
 double fahrenheit_to_kelvin (double fahrenheit){
 	return ((fahrenheit + 459.67)*(5/9));
 }
+
+
+//konversi reamur ke celcius dengan mengembalikan nilai reamur
 
 double reamur_to_celcius (double reamur){
 	return (reamur*5/4);
 }
 
+
+//konversi nilai reamur ke fahrenheit dengan mengembalikan nilai reamur
 double reamur_to_fahrenheit(double reamur){
 	return ((reamur * 9/4)+32);
 }
 
+
+//konversi nilai reamur ke kelvin dengan mengembalikan nilai reamur
 double reamur_to_kelvin(double reamur){
 	return ((reamur * 5/4)+273.15);
 }
 
+
+//konversi nilai kelvin ke celcius dengan mengembalikan nilai kelvin
 double kelvin_to_celcius(double kelvin){
 	return  (kelvin - 273);
 }
 
+
+//konversi nilai kelvin ke reamur dengan mengembalikan nilai kelvin
 double kelvin_to_reamur(double kelvin){
 	return ((kelvin-273) * 0.8);
 }
+
+//konversi nilai kelvin ke fahrenheit dengan mengembalikan nilai kelvin
+double kelvin_to_fahrenheit(double kelvin){
+	return ((kelvin-273)*(1.8) + 32);
+}
+
 
 double kelvin_to_fahrenheit(double kelvin){
 	return ((kelvin-273)*(1.8) + 32);
@@ -76,6 +140,8 @@ void menu_pilih_celcius (){
 	tampil_hasil_konversi_celcius();
 }
 
+
+//modul untuk menampilkan hasil konversi celcius
 void tampil_hasil_konversi_celcius() {
 	int pilih;
 	double hasil_konversi;
@@ -106,6 +172,7 @@ void menu_pilih_fahrenheit(){
 	tampil_hasil_konversi_fahrenheit();
 }
 
+//modul tampil hasil konversi fahrenheit
 void tampil_hasil_konversi_fahrenheit(){
 	int pilih;
 	double hasil_konversi;
