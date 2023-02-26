@@ -186,7 +186,7 @@ void MenuLain(){
 			break;
 			}
 			case 6: {system("cls");
-			menuFaktorialPermutasiKombinasi();
+			menuKombinasiPermutasi();
 			break;
 			}
 			case 7: {system("cls");
