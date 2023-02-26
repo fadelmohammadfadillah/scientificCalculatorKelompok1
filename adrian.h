@@ -1,14 +1,24 @@
 #ifndef adrian_h
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <math.h>
 
 typedef struct{
-	int pembilang;
-	int penyebut;
+	int pembilang;//bagian atas pecahan
+	int penyebut;//bagian bawah pecahan
 }pecahan;
 
-pecahan Sederhana(pecahan p1){
+//deklarasi modul
+pecahan sederhana(pecahan p1);
+pecahan sumP(pecahan p1, pecahan p2);
+pecahan minP(pecahan p1, pecahan p2);
+pecahan multiplyP(pecahan p1, pecahan p2);
+pecahan divideP(pecahan p1, pecahan p2);
+pecahan inputP();
+void outputP(pecahan p1);
+double logBase10(double angka);
+
+pecahan sederhana(pecahan p1){
 	pecahan hasil;
 	hasil = p1;
 	while(hasil.pembilang % 5 == 0  && hasil.penyebut % 5 == 0){
@@ -30,8 +40,7 @@ pecahan sumP(pecahan p1, pecahan p2){
 	pecahan jumlah;
 	jumlah.penyebut = p1.penyebut * p2.penyebut;
 	jumlah.pembilang = ((jumlah.penyebut/p1.penyebut) * p1.pembilang) + ((jumlah.penyebut/p2.penyebut) * p2.pembilang);
-	int i;
-	jumlah = Sederhana(jumlah);
+	jumlah = sederhana(jumlah);
 	return jumlah;
 }
 
@@ -39,8 +48,7 @@ pecahan minP(pecahan p1, pecahan p2){
 	pecahan hasil;
 	hasil.penyebut = p1.penyebut * p2.penyebut;
 	hasil.pembilang = ((hasil.penyebut/p1.penyebut) * p1.pembilang) - ((hasil.penyebut/p2.penyebut) * p2.pembilang);
-	int i;
-	hasil = Sederhana(hasil);
+	hasil = sederhana(hasil);
 	return hasil;
 }
 
@@ -48,8 +56,7 @@ pecahan multiplyP(pecahan p1, pecahan p2){
 	pecahan hasil;
 	hasil.penyebut = p1.penyebut * p2.penyebut;
 	hasil.pembilang = p1.pembilang * p2.pembilang;
-	int i;
-	hasil = Sederhana(hasil);
+	hasil = sederhana(hasil);
 	return hasil;
 }
 
@@ -57,11 +64,11 @@ pecahan divideP(pecahan p1, pecahan p2){
 	pecahan hasil;
 	hasil.penyebut = p1.penyebut * p2.pembilang;
 	hasil.pembilang = p1.pembilang * p2.penyebut;
-	int i;
-	hasil = Sederhana(hasil);
+	hasil = sederhana(hasil);
 	return hasil;
 }
-pecahan inputp(){
+
+pecahan inputP(){
 	pecahan p;
 	printf("\nSilahkan input pembilang : ");
 	scanf("%d", &p.pembilang);
@@ -70,25 +77,28 @@ pecahan inputp(){
 	return p;
 }
 
-void output(pecahan p1){
+void outputP(pecahan p1){
 	printf("%d/%d", p1.pembilang, p1.penyebut);
 }
 
-
 void menuPecahan(){
 	pecahan p1, p2,hasil;
-	p1 = inputp();
-	output(p1);
-	p2 = inputp();
-	output(p2);
+	p1 = inputP();
+	outputP(p1);
+	p2 = inputP();
+	outputP(p2);
 	printf("\n");
 	hasil = sumP(p1, p2);
-	output(p1);printf("+");output(p2);printf("=");output(hasil);printf("\n");
+	outputP(p1);printf("+");outputP(p2);printf("=");outputP(hasil);printf("\n");
 	hasil = minP(p1, p2);
-	output(p1);printf("-");output(p2);printf("=");output(hasil);printf("\n");
+	outputP(p1);printf("-");outputP(p2);printf("=");outputP(hasil);printf("\n");
 	hasil = multiplyP(p1, p2);
-	output(p1);printf("*");output(p2);printf("=");output(hasil);printf("\n");
+	outputP(p1);printf("*");outputP(p2);printf("=");outputP(hasil);printf("\n");
 	hasil = divideP(p1, p2);
-	output(p1);printf(":");output(p2);printf("=");output(hasil);printf("\n");
+	outputP(p1);printf(":");outputP(p2);printf("=");outputP(hasil);printf("\n");
+}
+
+double logBase10(double angka){
+	return log10(angka);
 }
 #endif
