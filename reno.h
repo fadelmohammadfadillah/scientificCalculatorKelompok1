@@ -128,9 +128,6 @@ double kelvin_to_fahrenheit(double kelvin){
 }
 
 
-double kelvin_to_fahrenheit(double kelvin){
-	return ((kelvin-273)*(1.8) + 32);
-}
 
 void menu_pilih_celcius (){
 	printf("Masukkan nilai celcius : ");
