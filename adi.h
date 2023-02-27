@@ -14,20 +14,14 @@ int kombinasi(int n, int r);
 //end modul
 
 double pangkat(double angka, double pangkat){
-	int i;
 	double hasil = 0;
-	for (i = 0; i < pangkat;i++){
-		hasil = pow(angka, pangkat);
-	}
+	hasil = pow(angka, pangkat);
 	return hasil;
 }
 
 double akar(double angka, double pangkatAkar){
-	int i;
 	double hasil = 0;
-	for (i = 0; i < pangkatAkar;i++){
-		hasil = pow(angka, 1.0/pangkatAkar);
-	}
+	hasil = pow(angka, 1.0/pangkatAkar);
 	return hasil;
 }
 
