@@ -38,6 +38,12 @@ double nonArithmeticOperation(double num, char opr[]){
 		return HitungCos(num);
 	}else if (strcmp(opr, "tan(")==0){
 		return HitungTan(num);
+	}else if (strcmp(opr, "cosec(")==0){
+		return HitungCosec(num);
+	}else if(strcmp(opr, "secan(")==0){
+		return HitungSec(num);
+	}else if(strcmp(opr, "cotan(")==0){
+		return HitungCotan(num);
 	}else if (strcmp(opr, "asin(")==0){
 		return Inverse_Sin(num);
 	}else if (strcmp(opr, "acos(")==0){
@@ -149,67 +155,70 @@ void MenuAritmatika(){
 	system("cls");
 }
 
-void MenuLain(){
-	int is_on = 1;
-	while (is_on == 1){
-		int pilihan;
-	 	printf("Menu Kalkulator: \n");
-  		printf("1. Konversi Suhu\n");
-	    printf("2. Operasi Statistika\n");
-	    printf("3. Operasi Pecahan\n");
-	    printf("4. Konversi Jarak\n");
-	    printf("5. Operasi Matrix\n");
-	    printf("6. Kombinasi dan Permutasi\n");
-		printf("7. Konversi Massa\n");
-	    printf("0. Kembali ke menu awal\n");
-	    printf("pilihan : ");
-	    scanf("%d", &pilihan);
-	    switch(pilihan){
-	    	case 1: {system("cls");
-			menu_pilih_tipe_suhu ();
-			break;
-			}
-			case 2: {system("cls");
-			ProgramStatistika();
-			break;
-			}
-			case 3: {system("cls");
-			menuPecahan();
-			break;
-			}
-			case 4: {system("cls");
-			memilih_tipe_jarak();
-			break;
-			}
-			case 5: {system("cls");
-			Matrix();
-			break;
-			}
-			case 6: {system("cls");
-			menuKombinasiPermutasi();
-			break;
-			}
-			case 7: {system("cls");
-			memilih_tipe_massa();
-			break;
-			}
-			case 0: {
-			is_on = 0;
-			break;
-			}
-			default: {
-				printf("\n\n---Invalid Input---\n\n---Mohon Ulangi---\n");
-				system("pause");
-				system("cls");
-				main();
-				break;
-			}
-		}
+/*menu lain digunakan sebelum UTS*/
+//void MenuLain(){
+//	int is_on = 1;
+//	while (is_on == 1){
+//		int pilihan;
+//	 	printf("Menu Kalkulator: \n");
+//  		printf("1. Konversi Suhu\n");
+//	    printf("2. Operasi Statistika\n");
+//	    printf("3. Operasi Pecahan\n");
+//	    printf("4. Konversi Jarak\n");
+//	    printf("5. Operasi Matrix\n");
+//	    printf("6. Kombinasi dan Permutasi\n");
+//		printf("7. Konversi Massa\n");
+//	    printf("0. Kembali ke menu awal\n");
+//	    printf("pilihan : ");
+//	    scanf("%d", &pilihan);
+//	    switch(pilihan){
+//	    	case 1: {system("cls");
+//			menu_pilih_tipe_suhu ();
+//			break;
+//			}
+//			case 2: {system("cls");
+//			ProgramStatistika();
+//			break;
+//			}
+//			case 3: {system("cls");
+//			menuPecahan();
+//			break;
+//			}
+//			case 4: {system("cls");
+//			memilih_tipe_jarak();
+//			break;
+//			}
+//			case 5: {system("cls");
+//			Matrix();
+//			break;
+//			}
+//			case 6: {system("cls");
+//			menuKombinasiPermutasi();
+//			break;
+//			}
+//			case 7: {system("cls");
+//			memilih_tipe_massa();
+//			break;
+//			}
+//			case 0: {
+//			is_on = 0;
+//			break;
+//			}
+//			default: {
+//				printf("\n\n---Invalid Input---\n\n---Mohon Ulangi---\n");
+//				system("pause");
+//				system("cls");
+//				main();
+//				break;
+//			}
+//		}
+//
+//	}
+//	system("cls");
+//	main();
+//}
+/*menu lain tidak digunakan*/
 
-	}
-	system("cls");
-	main();
-}
 
 int main (){
 	char choice = 'Y';
@@ -221,7 +230,6 @@ int main (){
 		}while(choice == 'Y' || choice == 'y');
 	return 0;
 	}
-
 
 //end
 
