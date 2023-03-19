@@ -212,40 +212,18 @@ void MenuLain(){
 }
 
 int main (){
-	while (true){
-		int pilihan;
-	 	printf("Menu Kalkulator: \n");
-		printf("1. Menu Aritmatika\n");
-		printf("2. Menu Lain-Lain\n");
-	    printf("0. Exit Program\n");
-	    printf("pilihan : ");
-	    fflush(stdin);
-	    scanf("%d", &pilihan);
-	    switch(pilihan){
-	    	case 1: {system("cls");
-			MenuAritmatika();
-			break;
-			}
-			case 2: {system("cls");
-			MenuLain();
-			break;
-			}
-			case 0: {
-			exit(0);
-			break;
-			}
-			default: {
-				printf("\n\n---Invalid Input---\n\n---Mohon Ulangi---\n");
-				system("pause");
-				system("cls");
-				main();
-				break;
-			}
-		}
+	char choice = 'Y';
+	do{
+	    MenuAritmatika();
+		printf("Apakah anda ingin melanjutkan? Y/T \n");
+		scanf(" %c",&choice);
+		getchar();
+		}while(choice == 'Y' || choice == 'y');
+	return 0;
 	}
-}
 
 
+//end
 
 
 
