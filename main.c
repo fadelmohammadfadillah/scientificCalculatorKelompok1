@@ -26,7 +26,7 @@ double Operation(double num1, double num2, char opr) {
 		case '%':
 			return Mod(num1,num2);
         default:
-            printf("Invalid operator: %c", opr);
+            printf("Invalid expression: %c \n", opr);
 			system("pause");
     }
 }
@@ -38,12 +38,6 @@ double nonArithmeticOperation(double num, char opr[]){
 		return HitungCos(num);
 	}else if (strcmp(opr, "tan(")==0){
 		return HitungTan(num);
-	}else if (strcmp(opr, "cosec(")==0){
-		return HitungCosec(num);
-	}else if(strcmp(opr, "secan(")==0){
-		return HitungSec(num);
-	}else if(strcmp(opr, "cotan(")==0){
-		return HitungCotan(num);
 	}else if (strcmp(opr, "asin(")==0){
 		return Inverse_Sin(num);
 	}else if (strcmp(opr, "acos(")==0){
@@ -54,9 +48,16 @@ double nonArithmeticOperation(double num, char opr[]){
 		return logBase10(num);
 	}else if (strcmp(opr, "ln(") == 0){
 		return logBase(num);
-	}else {
-		printf("Invalid operator : %s", opr);
-		system("pause");
+	}else if (strcmp(opr, "cosec(")==0){
+		return HitungCosec(num);
+	}else if(strcmp(opr, "secan(")==0){
+		return HitungSec(num);
+	}else if(strcmp(opr, "cotan(")==0){
+		return HitungCotan(num);
+	}
+	else {
+		printf("Invalid expression : %s \n", opr);
+		printf("seharusnya %s()\nError ", opr);
 	}
 }
 
@@ -104,17 +105,24 @@ void MenuAritmatika(){
 			}
 			//untuk mengarahkan sebelum index operator '(' sehingga akan ter-overwrite pada iterasi berikutnya
 			topOpr--;
-		}else if(str[i] == 's' ||str[i] == 't' ||str[i] == 'c' ||str[i] == 'a'|| str[i] == 'l'){
-			//untuk operasi non-aritmatik
+		}else if(str[i] == 's' ||str[i] == 't' ||str[i] == 'c' ||str[i] == 'a'|| str[i] == 'l' ){
+			//untuk operasi non-aritmatik menggunakan cara infix
 			char tempChar[10];
 			int tempCharTop = 0;
 			char tempNum[10];
 			int tempNumTop=0;
+			bool beforeIsNumber = false;
+			if (isdigit(str[i-1])){
+				//jika ekspresi matematika sebelum log adalah angka
+				//maka dianggap logaritma basis bebas
+				beforeIsNumber = true;
+			}
 			while(!(isdigit(str[i]))){
 				tempChar[tempCharTop] = str[i];
 				i++;
 				tempCharTop++;
 			}
+			tempChar[tempCharTop] = '\0';
 			while (isdigit(str[i]) || str[i] == '.'){
 				tempNum[tempNumTop] = str[i];
 				i++;
@@ -123,8 +131,28 @@ void MenuAritmatika(){
 			topNum++;
 			//mengganti operator dengan character null
 			tempNum[tempNumTop] = '\0';
-			stackNum[topNum] = nonArithmeticOperation(strtod(tempNum, NULL), tempChar);
+			//Pengecekan apakah operasi infix atau prefix
+			if (beforeIsNumber && strcmp(tempChar, "log(")==0){
+				double x = strtod(tempNum,NULL);
+				topNum--;
+				double b = stackNum[topNum];
+				stackNum[topNum] = logBase(x)/logBase(b);
+			}
+//			else if(beforeIsNumber && strcmp(tempChar, "v(")==0){
+//				double num1 = strtod(tempNum, NULL);
+//				topNum--;
+//				double num2 = stackNum[topNum];
+//				stackNum[topNum] = akar(num1,num2);
+//			}
+			else{
+				stackNum[topNum] = nonArithmeticOperation(strtod(tempNum, NULL), tempChar);
+			}
 		}else if (str[i] =='!'){
+			if(isdigit(str[i+1])){
+				//jika setelah ! ada angka maka invalid expression
+				printf("setelah '!' harus berupa operator\n");
+				return;
+			}
 			stackNum[topNum] = (double) faktorial(stackNum[topNum]);
 		}
 		else {
@@ -137,6 +165,11 @@ void MenuAritmatika(){
 				char opr = stackOpr[topOpr];
 				topOpr--;
 				stackNum[topNum] = Operation(num1,num2,opr);
+			}
+			if(!isdigit(str[i+1]) && !(str[i+1] == '(')){
+				//jika setelah operator ada operator maka tidak valid
+				printf("ekspresi matematika tidak valid karena setelah '%c' ada '%c'\n", str[i], str[i+1]);
+				return;
 			}
 			topOpr++;
 			stackOpr[topOpr] = str[i];
@@ -151,73 +184,7 @@ void MenuAritmatika(){
 		stackNum[topNum] = Operation(num1,num2,opr);
 	}
 	printf("result = %g\n", stackNum[0]);
-	system("pause");
-	system("cls");
 }
-
-/*menu lain digunakan sebelum UTS*/
-//void MenuLain(){
-//	int is_on = 1;
-//	while (is_on == 1){
-//		int pilihan;
-//	 	printf("Menu Kalkulator: \n");
-//  		printf("1. Konversi Suhu\n");
-//	    printf("2. Operasi Statistika\n");
-//	    printf("3. Operasi Pecahan\n");
-//	    printf("4. Konversi Jarak\n");
-//	    printf("5. Operasi Matrix\n");
-//	    printf("6. Kombinasi dan Permutasi\n");
-//		printf("7. Konversi Massa\n");
-//	    printf("0. Kembali ke menu awal\n");
-//	    printf("pilihan : ");
-//	    scanf("%d", &pilihan);
-//	    switch(pilihan){
-//	    	case 1: {system("cls");
-//			menu_pilih_tipe_suhu ();
-//			break;
-//			}
-//			case 2: {system("cls");
-//			ProgramStatistika();
-//			break;
-//			}
-//			case 3: {system("cls");
-//			menuPecahan();
-//			break;
-//			}
-//			case 4: {system("cls");
-//			memilih_tipe_jarak();
-//			break;
-//			}
-//			case 5: {system("cls");
-//			Matrix();
-//			break;
-//			}
-//			case 6: {system("cls");
-//			menuKombinasiPermutasi();
-//			break;
-//			}
-//			case 7: {system("cls");
-//			memilih_tipe_massa();
-//			break;
-//			}
-//			case 0: {
-//			is_on = 0;
-//			break;
-//			}
-//			default: {
-//				printf("\n\n---Invalid Input---\n\n---Mohon Ulangi---\n");
-//				system("pause");
-//				system("cls");
-//				main();
-//				break;
-//			}
-//		}
-//
-//	}
-//	system("cls");
-//	main();
-//}
-/*menu lain tidak digunakan*/
 
 
 int main (){
@@ -227,9 +194,11 @@ int main (){
 		printf("Apakah anda ingin melanjutkan? Y/T \n");
 		scanf(" %c",&choice);
 		getchar();
+		system("cls");
 		}while(choice == 'Y' || choice == 'y');
 	return 0;
 	}
+
 
 //end
 

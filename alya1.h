@@ -38,28 +38,28 @@ double kosinus(double x) {
     }
     return hasil;
 }
-//
-//double Tangen(double x) { // fungsi tangen dalam radian
-//    return Sinus(x) / Cosinus(x);
-//}
 
-double tangen(double x) {
-    double hasil = x; //menyimpan hasil perhitungan tangen nantinya
-    double pangkat = x; //menyimpan nilai pangkat dari x dalam perhitungan deret tylor
-    double faktorial = 1; //menyimpan nilai faktorial pada perhitungan deret tylor
-    double tambahan = x; //nilai tambahan dari setiap suku deret
-    int i; /*merepresentasikan bilangan ganjil dalam iterasi, untuk menghitung 
-        faktorial dari bilangan tersebut dan bilangan sebelumnya*/
-    int tanda = -1; //digunakan untuk mengubah tanda dari setiap suku deret
-    for (i = 3; i <= 19; i += 2) {
-        pangkat *= x * x;
-        faktorial *= i * (i - 1);
-        tambahan = tanda * (pangkat / faktorial);
-        hasil += tambahan;
-        tanda *= -1; //nilai akan bergantian positif dan negatif saat iterasi agar hasil lebih akurat
-    }
-    return hasil;
+double tangen(double x) { // fungsi tangen dalam radian
+    return sinus(x) / kosinus(x);
 }
+
+//double tangen(double x) {
+//    double hasil = x; //menyimpan hasil perhitungan tangen nantinya
+//    double pangkat = x; //menyimpan nilai pangkat dari x dalam perhitungan deret tylor
+//    double faktorial = 1; //menyimpan nilai faktorial pada perhitungan deret tylor
+//    double tambahan = x; //nilai tambahan dari setiap suku deret
+//    int i; /*merepresentasikan bilangan ganjil dalam iterasi, untuk menghitung 
+//        faktorial dari bilangan tersebut dan bilangan sebelumnya*/
+//    int tanda = -1; //digunakan untuk mengubah tanda dari setiap suku deret
+//    for (i = 3; i <= 19; i += 2) {
+//        pangkat *= x * x;
+//        faktorial *= i * (i - 1);
+//        tambahan = tanda * (pangkat / faktorial);
+//        hasil += tambahan;
+//        tanda *= -1; //nilai akan bergantian positif dan negatif saat iterasi agar hasil lebih akurat
+//    }
+//    return hasil;
+//}
 
 double HitungCosec(double derajat) { //fungsi cosec dalam derajat
     double rad = derajat * PI / 180;
