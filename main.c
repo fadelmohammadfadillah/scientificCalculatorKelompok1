@@ -47,13 +47,15 @@ double nonArithmeticOperation(double num, char opr[]){
 	}else if (strcmp(opr, "log(") == 0){
 		return logBase10(num);
 	}else if (strcmp(opr, "ln(") == 0){
-		return logNature(num);
+		return logBase(num);
 	}else if (strcmp(opr, "cosec(")==0){
 		return HitungCosec(num);
 	}else if(strcmp(opr, "secan(")==0){
 		return HitungSec(num);
 	}else if(strcmp(opr, "cotan(")==0){
 		return HitungCotan(num);
+	}else if(strcmp(opr, "^(")==0){
+		return pangkat(num,2);
 	}
 	else {
 		printf("Invalid expression : %s \n", opr);
@@ -70,7 +72,7 @@ void MenuAritmatika(){
 	scanf("%s", str);
 	for (i=0;i<strlen(str);i++){
 		//cek apakah angka dan digit angka tersebut agar disatukan menjadi sebuah kesatuan angka dalam array
-		if(isdigit(str[i]) || (isNegative(str, i)&&stackOpr[topOpr] == '(') ){
+		if(isDigit(str[i]) || (isNegative(str, i)&&stackOpr[topOpr] == '(') ){
 			bool is_negative =false;
    			if (str[i] == '-'){
    				is_negative =true;
@@ -78,7 +80,7 @@ void MenuAritmatika(){
 			   }
 			char tempNum[10];
 			int tempNumTop=0;
-			while (isdigit(str[i]) || str[i] == '.'){
+			while (isDigit(str[i]) || str[i] == '.'){
 				tempNum[tempNumTop] = str[i];
 				i++;
 				tempNumTop++;
@@ -105,25 +107,25 @@ void MenuAritmatika(){
 			}
 			//untuk mengarahkan sebelum index operator '(' sehingga akan ter-overwrite pada iterasi berikutnya
 			topOpr--;
-		}else if(str[i] == 's' ||str[i] == 't' ||str[i] == 'c' ||str[i] == 'a'|| str[i] == 'l' ){
+		}else if(str[i] == 's' ||str[i] == 't' ||str[i] == 'c' ||str[i] == 'a'|| str[i] == 'l'){
 			//untuk operasi non-aritmatik menggunakan cara infix
 			char tempChar[10];
 			int tempCharTop = 0;
 			char tempNum[10];
 			int tempNumTop=0;
 			bool beforeIsNumber = false;
-			if (isdigit(str[i-1])){
+			if (isDigit(str[i-1])){
 				//jika ekspresi matematika sebelum log adalah angka
 				//maka dianggap logaritma basis bebas
 				beforeIsNumber = true;
 			}
-			while(!(isdigit(str[i]))){
+			while(!(isDigit(str[i]))){
 				tempChar[tempCharTop] = str[i];
 				i++;
 				tempCharTop++;
 			}
 			tempChar[tempCharTop] = '\0';
-			while (isdigit(str[i]) || str[i] == '.'){
+			while (isDigit(str[i]) || str[i] == '.'){
 				tempNum[tempNumTop] = str[i];
 				i++;
 				tempNumTop++;
@@ -138,17 +140,11 @@ void MenuAritmatika(){
 				double b = stackNum[topNum];
 				stackNum[topNum] = logBase(x)/logBase(b);
 			}
-//			else if(beforeIsNumber && strcmp(tempChar, "v(")==0){
-//				double num1 = strtod(tempNum, NULL);
-//				topNum--;
-//				double num2 = stackNum[topNum];
-//				stackNum[topNum] = akar(num1,num2);
-//			}
 			else{
 				stackNum[topNum] = nonArithmeticOperation(strtod(tempNum, NULL), tempChar);
 			}
 		}else if (str[i] =='!'){
-			if(isdigit(str[i+1])){
+			if(isDigit(str[i+1])){
 				//jika setelah ! ada angka maka invalid expression
 				printf("setelah '!' harus berupa operator\n");
 				return;
@@ -166,7 +162,7 @@ void MenuAritmatika(){
 				topOpr--;
 				stackNum[topNum] = Operation(num1,num2,opr);
 			}
-			if(!isdigit(str[i+1]) && !(str[i+1] == '(')){
+			if(isDigit(str[i+1]) == false && str[i+1] != '(' && str[i+1] != 'l' && str[i+1] != 's' && str[i+1] != 't' && str[i+1] != 'c' && str[i+1] != 'a'){
 				//jika setelah operator ada operator maka tidak valid
 				printf("ekspresi matematika tidak valid karena setelah '%c' ada '%c'\n", str[i], str[i+1]);
 				return;
@@ -189,6 +185,7 @@ void MenuAritmatika(){
 
 int main (){
 	char choice = 'Y';
+//	printf("choise: %d", isDigit(choice));
 	do{
 	    MenuAritmatika();
 		printf("Apakah anda ingin melanjutkan? Y/T \n");

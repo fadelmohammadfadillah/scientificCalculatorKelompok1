@@ -49,4 +49,12 @@ bool isNegative(char string[], int i){
 	}
 }
 
+bool isDigit(char str){
+	if (str < '0' || str > '9'){
+		return false;
+	}else{
+		return true;
+	}
+}
+
 #endif
