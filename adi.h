@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <math.h>
-#include <string.h>
 #ifndef adi_h
 #define adi_h
 
@@ -19,6 +17,15 @@ double pangkat(double angka, double pangkat){
 	return hasil;
 }
 
+double fabsolute(double angka){ //modul pengganti fabs dari math.h yang digunakan untuk mengecek jika negatif maka akan di kali negatif agar nilai abolute (tetap positif)
+	if (angka < 0){
+		return angka *- 1;
+	}else{
+		return angka;
+	}
+	
+}
+
 double akar(double angka, double pangkatAkar) { //menggunakan metode bisection
     double rendah = 0.0;
     double tinggi = angka;
@@ -26,7 +33,8 @@ double akar(double angka, double pangkatAkar) { //menggunakan metode bisection
     double hasil = tengah;
 
     // loop sampai selisih hasil akar pangkat dengan angka kurang dari 0.0001
-	while (fabs(hasil - angka) >= 0.0001) {
+	while (fabsolute(hasil - angka) >= 0.0001) {
+		double temp;
 	    // hitung nilai tengah berdasarkan nilai rendah dan tinggi
 	    tengah = (rendah + tinggi) / 2.0;
 	    // hitung hasil akar pangkat dari nilai tengah
@@ -34,7 +42,7 @@ double akar(double angka, double pangkatAkar) { //menggunakan metode bisection
 	    hasil = pangkat(tengah, pangkatAkar);
 	    // jika selisih antara hasil dan angka kurang dari 0.0001
 	    // kembalikan nilai tengah
-	    if (fabs(hasil - angka) < 0.0001) {
+	    if (fabsolute(hasil - angka) < 0.0001){ //jika negatif maka akan di ubah menjadi positif
 	        return tengah;
 	    }
 	    // jika hasil kurang dari angka, naikkan nilai rendah menjadi nilai tengah
