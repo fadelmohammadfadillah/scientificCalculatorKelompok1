@@ -3,8 +3,8 @@
 #include <conio.h>
 #include <stdbool.h>
 #include "fadel.h"
-#include "reno.h"
-#include "adi.h"
+//#include "reno.h"
+//#include "adi.h"
 #include "adrian.h"
 #include "alya1.h"
 #include "rafi.h"
@@ -139,7 +139,7 @@ void MenuAritmatika(){
 				double x = strtod(tempNum,NULL);
 				topNum--;
 				double b = stackNum[topNum];
-				stackNum[topNum] = logNature(x)/logNature(b);
+				stackNum[topNum] = logBase(x, b);
 			}
 			else{
 				stackNum[topNum] = nonArithmeticOperation(strtod(tempNum, NULL), tempChar);
