@@ -7,99 +7,56 @@
 //modul
 double pangkat(double angka, double pangkat);
 double akar(double angka, double pangkatAkar);
-void menuKombinasiPermutasi();
 int faktorial(int angka);
-int permutasi(int n, int r);
-int kombinasi(int n, int r);
 //end modul
 
 double pangkat(double angka, double pangkat){
-	double hasil = 0;
-	hasil = pow(angka, pangkat);
-	return hasil;
-}
-
-double akar(double angka, double pangkatAkar){
-	double hasil = 0;
-	hasil = pow(angka, 1.0/pangkatAkar);
-	return hasil;
-}
-
-//fitur lain-lain
-void menuKombinasiPermutasi(){
-	int pilihMenu, n, r, hasil;
-	printf("Menu\n");
-	printf("1. Kombinasi\n");
-	printf("2. Permutasi\n");
-	printf("3. Back to home\n");
-	printf("Silahkan pilih menu : ");
-	scanf("%d",&pilihMenu);
-	switch (pilihMenu){
-		case 1:
-			printf("n harus lebih dari atau sama dengan r\n");
-			printf("Masukan n: ");
-		    scanf("%d", &n);
-		    printf("Masukan r: ");
-		    scanf("%d", &r);
-		    hasil = kombinasi(n,r);
-		    printf ("Kombinasi dari n = %d! dan r = %d! adalah %d\n",n, r, hasil);
-			system("pause");
-			system("cls");
-			menuKombinasiPermutasi();
-		break;
-		case 2:
-			printf("n harus lebih dari atau sama dengan r\n");
-			printf("Masukan n: ");
-		    scanf("%d", &n);
-		    printf("Masukan r: ");
-		    scanf("%d", &r);
-		    hasil = permutasi(n,r);
-		    printf ("Permutasi dari n = %d! dan r = %d! adalah %d\n",n, r, hasil);
-			system("pause");
-			system("cls");
-			menuKombinasiPermutasi();
-		break;
-		case 3:
-			system("cls");
-			main();
-		break;
-		default:
-			printf("Kesalahan inputan!");
-		break;
+	double hasil = 1; //untuk menyimpan hasil perpangkatan.
+	int i;
+	for (i = 1; i <= pangkat; i++) { //Loop sampai "i" kurang dari atau sama dengan nilai "pangkat".
+	  hasil *= angka; //var "hasil" akan dikalikan dengan "angka" dan hasilnya di simpan di var "hasil".
 	}
+	return hasil;
+}
+
+double akar(double angka, double pangkatAkar) { //menggunakan metode bisection
+    double rendah = 0.0;
+    double tinggi = angka;
+    double tengah = (rendah + tinggi) / 2.0;
+    double hasil = tengah;
+
+    // loop sampai selisih hasil akar pangkat dengan angka kurang dari 0.0001
+	while (fabs(hasil - angka) >= 0.0001) {
+	    // hitung nilai tengah berdasarkan nilai rendah dan tinggi
+	    tengah = (rendah + tinggi) / 2.0;
+	    // hitung hasil akar pangkat dari nilai tengah
+	    hasil = 1.0;
+	    hasil = pangkat(tengah, pangkatAkar);
+	    // jika selisih antara hasil dan angka kurang dari 0.0001
+	    // kembalikan nilai tengah
+	    if (fabs(hasil - angka) < 0.0001) {
+	        return tengah;
+	    }
+	    // jika hasil kurang dari angka, naikkan nilai rendah menjadi nilai tengah
+	    if (hasil < angka) {
+	        rendah = tengah;
+	    }
+	    // jika hasil lebih dari angka, turunkan nilai tinggi menjadi nilai tengah
+	    else {
+	        tinggi = tengah;
+	    }
+	}
+	// kembalikan nilai tengah jika selisih antara hasil dan angka kurang dari 0.0001
+	return tengah;
 }
 
 int faktorial(int angka){
-	int fac;
+	int fac = 1; //untuk menyimpan hasil faktorial
 	int i;
-    fac = 1;
-    for(i = 1; i <= angka; i++){
-        fac *= i;
+    for(i = 1; i <= angka; i++){ //Loop sampai "i" kurang dari atau sama dengan nilai "angka".
+        fac *= i; //var "fac" akan dikalikan dengan "i" dan hasilnya di simpan di var "fac".
     }
 	return fac;
 }
-
-int permutasi(int n, int r){
-	int hasil;
-    if((n >= r) && (n > 0) && (r >= 0)){
-	    hasil = faktorial(n) / faktorial(n - r);
-    }
-    else{
-    	printf("Error! n harus >= r\n");
-    }
-    return hasil;
-}
-
-int kombinasi(int n, int r){
-	int hasil;
-    if((n >= r) && (n > 0) && (r >= 0)){
-	    hasil = faktorial(n) / (faktorial(r) * faktorial(n - r));
-    }
-    else{
-    	printf("Error! n harus >= r\n");
-    }
-    return hasil;
-}
-//end fitur lain-lain
 
 #endif
