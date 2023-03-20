@@ -47,7 +47,7 @@ double nonArithmeticOperation(double num, char opr[]){
 	}else if (strcmp(opr, "log(") == 0){
 		return logBase10(num);
 	}else if (strcmp(opr, "ln(") == 0){
-		return logBase(num);
+		return logNature(num);
 	}else if (strcmp(opr, "cosec(")==0){
 		return HitungCosec(num);
 	}else if(strcmp(opr, "secan(")==0){
