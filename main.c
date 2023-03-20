@@ -135,10 +135,11 @@ void MenuAritmatika(){
 			tempNum[tempNumTop] = '\0';
 			//Pengecekan apakah operasi infix atau prefix
 			if (beforeIsNumber && strcmp(tempChar, "log(")==0){
+				//operasi logaritma basis bebas
 				double x = strtod(tempNum,NULL);
 				topNum--;
 				double b = stackNum[topNum];
-				stackNum[topNum] = logBase(x)/logBase(b);
+				stackNum[topNum] = logNature(x)/logNature(b);
 			}
 			else{
 				stackNum[topNum] = nonArithmeticOperation(strtod(tempNum, NULL), tempChar);
