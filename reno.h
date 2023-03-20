@@ -8,19 +8,19 @@ double logBase(double angka) // modul log natural, fungsi ini menerima sebuah ar
 	}
 	 //deklarasi variabel hasil dan term yang akan digunakan sebagai penampung.
      double hasil = 0.0;
-	 //hasil digunakan untuk menyimpan hasil perhitungan log berbasis r
-     double term = (angka - 1) / angka; 
+	 //hasil digunakan untuk menyimpan hasil perhitungan log berbasis e
+     double temp = (angka - 1) / angka; 
 	 //term menyimpan nilai suku deret taylor
      double i = 1;
      
-     if(term < 0)//untuk mengganti FABS yang ada pada liblary math.h agar hasil tetap positif
+     if(temp < 0)//untuk mengganti FABS yang ada pada liblary math.h agar hasil tetap positif
 	{
-    	term = -(term);
+    	temp = -(temp);
 	}
-     while (term > 1e-10) { // hingga suku terakhir sudah sangat kecil
-        hasil += term;
+     while (temp > 1e-10) { // hingga suku terakhir sudah sangat kecil
+        hasil += temp;
         i++;
-        term = pangkat((angka - 1) / angka, i) / i; //menggunakan fungsi pangkat yang ada pada adi.h
+        temp = pangkat((angka - 1) / angka, i) / i; //menggunakan fungsi pangkat yang ada pada adi.h
     }
      return hasil;
 }
