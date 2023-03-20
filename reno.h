@@ -1,33 +1,26 @@
 #include <stdio.h>
+#include "adi.h"
 
-double calculateLn(double x, int n) {
-    double sum = 0.0;
-    double term = x - 1.0;
-	int i;
-    for ( i = 1; i <= n; i++) {
-        if (i % 2 == 0) {
-            term = -(x - 1.0) / i;
-        } else {
-            term = (x - 1.0) / i;
-        }
-        sum += term;
+double logBase(double angka) // modul log natural, fungsi ini menerima sebuah argumen berupa bilangan yang akan dihitung logaritma basis e nya, dengan parameter angka berjenis input
+	{
+     if (angka <= 0) {
+        return NAN; // NaN (Not a Number) jika angka negatif atau nol
+	}
+	 //deklarasi variabel hasil dan term yang akan digunakan sebagai penampung.
+     double hasil = 0.0;
+	 //hasil digunakan untuk menyimpan hasil perhitungan log berbasis r
+     double term = (angka - 1) / angka; 
+	 //term menyimpan nilai suku deret taylor
+     double i = 1;
+     
+     if(term < 0)//untuk mengganti FABS yang ada pada liblary math.h agar hasil tetap positif
+	{
+    	term = -(term);
+	}
+     while (term > 1e-10) { // hingga suku terakhir sudah sangat kecil
+        hasil += term;
+        i++;
+        term = pangkat((angka - 1) / angka, i) / i; //menggunakan fungsi pangkat yang ada pada adi.h
     }
-
-    return sum;
-}
-
-int main() {
-    double x;
-    int n;
-
-    printf("Masukkan nilai x: ");
-    scanf("%lf", &x);
-
-    printf("Masukkan jumlah iterasi: ");
-    scanf("%d", &n);
-
-    double ln = calculateLn(x, n);
-    printf("ln(%g) = %.15g\n", x, ln);
-
-    return 0;
+     return hasil;
 }
