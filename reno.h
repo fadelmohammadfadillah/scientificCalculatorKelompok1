@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "adi.h"
 
-double logBase(double angka) // modul log natural, fungsi ini menerima sebuah argumen berupa bilangan yang akan dihitung logaritma basis e nya, dengan parameter angka berjenis input
+double logNature(double angka) // modul log natural, fungsi ini menerima sebuah argumen berupa bilangan yang akan dihitung logaritma basis e nya, dengan parameter angka berjenis input
 	{
      if (angka <= 0) {
         return NAN; // NaN (Not a Number) jika angka negatif atau nol
@@ -15,7 +15,7 @@ double logBase(double angka) // modul log natural, fungsi ini menerima sebuah ar
      
      if(temp < 0)//untuk mengganti FABS yang ada pada liblary math.h agar hasil tetap positif
 	{
-    	temp = -(temp);
+    	temp = -(temp); //agar nilai yang negatif diubah menjadi positif
 	}
      while (temp > 1e-10) { // hingga suku terakhir sudah sangat kecil
         hasil += temp;
