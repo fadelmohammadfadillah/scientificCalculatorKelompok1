@@ -64,16 +64,18 @@ double nonArithmeticOperation(double num, char opr[]){
 }
 
 void MenuAritmatika(){
-	char str[100], stackOpr[50];
-	int i,topOpr=-1;
+	char str[100];
+	int i;
+	addressOpr topOpr;
 	addressNum topNum;
 	topNum = NULL;
+	topOpr = NULL;
 	printf("Masukkan Ekspresi Matematika: ");
 	fflush(stdin);
 	scanf("%s", str);
 	for (i=0;i<strlen(str);i++){
 		//cek apakah angka dan digit angka tersebut agar disatukan menjadi sebuah kesatuan angka dalam array
-		if(isDigit(str[i]) || (isNegative(str, i)&&stackOpr[topOpr] == '(') ){
+		if(isDigit(str[i]) || (isNegative(str, i)&& infoOp(topOpr) == '(') ){
 			bool is_negative =false;
    			if (str[i] == '-'){
    				is_negative =true;
@@ -98,20 +100,17 @@ void MenuAritmatika(){
 			}
 			i--;
 		}else if (str[i] == '('){
-			topOpr++;
-			stackOpr[topOpr] = str[i];
+			pushOpr(&topOpr, str[i]);
 		} else if (str[i] == ')'){
-			while (stackOpr[topOpr] != '('){
+			while (infoOp(topOpr) != '('){
 				infoNum num2;
 				popNum(&topNum, &num2);
 				infoNum num1;
 				popNum(&topNum, &num1);
-				char opr = stackOpr[topOpr];
-				topOpr--;
+				infoOpr opr;
+				popOpr(&topOpr, &opr);
 				pushNum(&topNum, Operation(num1,num2,opr));
 			}
-			//untuk mengarahkan sebelum index operator '(' sehingga akan ter-overwrite pada iterasi berikutnya
-			topOpr--;
 		}else if(str[i] == 's' ||str[i] == 't' ||str[i] == 'c' ||str[i] == 'a'|| str[i] == 'l'){
 			//untuk operasi non-aritmatik menggunakan cara infix
 			char tempChar[10];
@@ -161,29 +160,29 @@ void MenuAritmatika(){
 		else {
 			//jika operator sebelumnya memiliki hierarki lebih tinggi maka akan dioperasikan terlebih dahulu
         	// '()' memiliki hierarki lebih rendah karena tidak akan dioperasikan pada blok kode ini
-			while (topOpr >=0 && operatorPriority(stackOpr[topOpr]) >= operatorPriority(str[i])){
+       		while (topOpr != NULL && operatorPriority(infoOp(topOpr)) >= operatorPriority(str[i])){
 				infoNum num2, num1;
 				popNum(&topNum, &num2);
 				popNum(&topNum, &num1);
-				char opr = stackOpr[topOpr];
-				topOpr--;
-				pushNum(&topNum, Operation(num1,num2,opr));
+				infoOpr op;
+				popOpr(&topOpr, &op);
+				pushNum(&topNum, Operation(num1,num2,op));
 			}
+			
 			if(isDigit(str[i+1]) == false && str[i+1] != '(' && str[i+1] != 'l' && str[i+1] != 's' && str[i+1] != 't' && str[i+1] != 'c' && str[i+1] != 'a'){
 				//jika setelah operator ada operator maka tidak valid
 				printf("ekspresi matematika tidak valid karena setelah '%c' ada '%c'\n", str[i], str[i+1]);
 				return;
 			}
-			topOpr++;
-			stackOpr[topOpr] = str[i];
+			pushOpr(&topOpr, str[i]);
 		}
 	}
-	while(topOpr>=0){
+	while(topOpr != NULL){
 		infoNum num2, num1;
 		popNum(&topNum, &num2);
 		popNum(&topNum, &num1);
-		char opr = stackOpr[topOpr];
-		topOpr--;
+		infoOpr opr;
+		popOpr(&topOpr, &opr);
 		pushNum(&topNum, Operation(num1,num2,opr));
 	}
 	printf("result = %g\n", info(topNum));
@@ -192,7 +191,6 @@ void MenuAritmatika(){
 
 int main (){
 	char choice = 'Y';
-//	printf("choise: %d", isDigit(choice));
 	do{
 	    MenuAritmatika();
 		printf("Apakah anda ingin melanjutkan? Y/T \n");

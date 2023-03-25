@@ -7,8 +7,10 @@
 #include <malloc.h>
 #define info(P) (P)->num
 #define next(P) (P)->next
+#define infoOp(P) (P)->opr
+#define nextOp(P) (P)->nextOpr
 
-/*MODUL-MODUL STACK LINKED LIST*/
+/*MODUL-MODUL STACK OPERAND LINKED LIST*/
 typedef struct tStackNum* addressNum;
 typedef double infoNum;
 typedef struct tStackNum {
@@ -47,25 +49,54 @@ void popNum(addressNum *top,infoNum *value){
 		*value = info(temp);
 		free(temp);
 	}else{/*Jika elemen stack = 1*/
-		top = NULL;
+		*top = NULL;
 		*value = info(temp);
 		free(temp);
 	}
 }
 
-//void tampil(address top){
-//	if (top != NULL){
-//		address temp = top;
-//		while (temp!= NULL){
-//			printf("%c ", info(temp));
-//			temp = next(temp);
-//		}
-//		printf("\n");
-//	}else {
-//		printf("--Stack Kosong--");
-//	}
-//
-//}
+/*MODUL-MODUL STACK OPERATOR LINKED LIST*/
+typedef struct tStackOpr* addressOpr;
+typedef char infoOpr;
+typedef struct tStackOpr {
+	infoOpr opr;
+	addressOpr nextOpr;
+}stackOpr;
+
+void pushOpr(addressOpr *top, infoOpr value){
+	addressOpr P;
+	P = (addressOpr) malloc (sizeof(stackOpr));/*alokasi memori sebesar adt stack*/
+	if (P==NULL){//jika alokasi tidak berhasil
+		return;
+	}
+	infoOp(P) = value;
+	nextOp(P) = NULL;
+	if(*top ==NULL){ /*push jika stack kosong*/
+		*top = P;
+	}else{/*push jika stack tidak kosong*/
+		nextOp(P) = *top;
+		*top = P;
+	}
+}
+
+void popOpr(addressOpr *top,infoOpr *value){
+	/*top adalah param i/o dibutuhkan untuk mengakses data pada stack*/
+	/*value adalah param output digunakan untuk mengembalikan nilai yang dikeluarkan ke pemanggil*/
+	if (*top == NULL){/*bila stack kosong maka akhiri*/
+		printf("\n--Stack Kosong--\n");
+		return;
+	}
+	addressOpr temp = *top;
+	if (nextOp(*top) != NULL){/*Cek apabila elemen stack > 1*/
+		*top = nextOp(*top);
+		*value = infoOp(temp);
+		free(temp);
+	}else{/*Jika elemen stack = 1*/
+		*top = NULL;
+		*value = infoOp(temp);
+		free(temp);
+	}
+}
 
 /*MODUL-MODUL ARITMATIKA DAN LAINNYA*/
 double Sum(double num1, double num2){
@@ -85,6 +116,8 @@ double Mod(double num1, double num2){
 }
 
 int operatorPriority(char opr){
+//	printf("bisa");
+//	printf("%c", opr);
 	switch (opr) {
         case '^':
 		case 'v':
