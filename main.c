@@ -94,7 +94,7 @@ void MenuAritmatika(){
 			if (is_negative){
 				infoNum num;
 				popNum(&topNum, &num);
-				pushNum(&topNum, num);
+				pushNum(&topNum, num*-1);
 			}
 			i--;
 		}else if (str[i] == '('){
