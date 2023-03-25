@@ -65,8 +65,9 @@ double nonArithmeticOperation(double num, char opr[]){
 
 void MenuAritmatika(){
 	char str[100], stackOpr[50];
-	int i, topNum=-1,topOpr=-1;
-	double  stackNum[100];
+	int i,topOpr=-1;
+	addressNum topNum;
+	topNum = NULL;
 	printf("Masukkan Ekspresi Matematika: ");
 	fflush(stdin);
 	scanf("%s", str);
@@ -80,17 +81,20 @@ void MenuAritmatika(){
 			   }
 			char tempNum[10];
 			int tempNumTop=0;
-			while (isDigit(str[i]) || str[i] == '.'){
+			while (isDigit(str[i]) || str[i] == '.'){ 
+			/*jika angka lebih dari 1 digit maka akan ditampung kedalam sebuah array of char*/
+			/*yang kemudian akan di typecast menggunakan strtod (string to double)*/
 				tempNum[tempNumTop] = str[i];
 				i++;
 				tempNumTop++;
 			}
-			topNum++;
 			//mengganti operator dengan character null
 			tempNum[tempNumTop] = '\0';
-			stackNum[topNum] = strtod(tempNum, NULL);
+			pushNum(&topNum, strtod(tempNum, NULL));
 			if (is_negative){
-				stackNum[topNum] *= -1;
+				infoNum num;
+				popNum(&topNum, &num);
+				pushNum(&topNum, num);
 			}
 			i--;
 		}else if (str[i] == '('){
@@ -98,12 +102,13 @@ void MenuAritmatika(){
 			stackOpr[topOpr] = str[i];
 		} else if (str[i] == ')'){
 			while (stackOpr[topOpr] != '('){
-				double num2 = stackNum[topNum];
-				topNum--;
-				double num1 = stackNum[topNum];
+				infoNum num2;
+				popNum(&topNum, &num2);
+				infoNum num1;
+				popNum(&topNum, &num1);
 				char opr = stackOpr[topOpr];
 				topOpr--;
-				stackNum[topNum] = Operation(num1,num2,opr);
+				pushNum(&topNum, Operation(num1,num2,opr));
 			}
 			//untuk mengarahkan sebelum index operator '(' sehingga akan ter-overwrite pada iterasi berikutnya
 			topOpr--;
@@ -130,19 +135,18 @@ void MenuAritmatika(){
 				i++;
 				tempNumTop++;
 			}
-			topNum++;
 			//mengganti operator dengan character null
 			tempNum[tempNumTop] = '\0';
 			//Pengecekan apakah operasi infix atau prefix
 			if (beforeIsNumber && strcmp(tempChar, "log(")==0){
 				//operasi logaritma basis bebas
-				double x = strtod(tempNum,NULL);
-				topNum--;
-				double b = stackNum[topNum];
-				stackNum[topNum] = logBase(x, b);
+				infoNum x = strtod(tempNum,NULL);
+				infoNum b;
+				popNum(&topNum, &b);
+				pushNum(&topNum, logBase(x, b));
 			}
 			else{
-				stackNum[topNum] = nonArithmeticOperation(strtod(tempNum, NULL), tempChar);
+				pushNum(&topNum, nonArithmeticOperation(strtod(tempNum, NULL), tempChar));
 			}
 		}else if (str[i] =='!'){
 			if(isDigit(str[i+1])){
@@ -150,18 +154,20 @@ void MenuAritmatika(){
 				printf("setelah '!' harus berupa operator\n");
 				return;
 			}
-			stackNum[topNum] = (double) faktorial(stackNum[topNum]);
+			infoNum num;
+			popNum(&topNum, &num);
+			pushNum(&topNum,(infoNum) faktorial(num) ) ;
 		}
 		else {
 			//jika operator sebelumnya memiliki hierarki lebih tinggi maka akan dioperasikan terlebih dahulu
         	// '()' memiliki hierarki lebih rendah karena tidak akan dioperasikan pada blok kode ini
 			while (topOpr >=0 && operatorPriority(stackOpr[topOpr]) >= operatorPriority(str[i])){
-				double num2 = stackNum[topNum];
-				topNum--;
-				double num1 = stackNum[topNum];
+				infoNum num2, num1;
+				popNum(&topNum, &num2);
+				popNum(&topNum, &num1);
 				char opr = stackOpr[topOpr];
 				topOpr--;
-				stackNum[topNum] = Operation(num1,num2,opr);
+				pushNum(&topNum, Operation(num1,num2,opr));
 			}
 			if(isDigit(str[i+1]) == false && str[i+1] != '(' && str[i+1] != 'l' && str[i+1] != 's' && str[i+1] != 't' && str[i+1] != 'c' && str[i+1] != 'a'){
 				//jika setelah operator ada operator maka tidak valid
@@ -173,14 +179,14 @@ void MenuAritmatika(){
 		}
 	}
 	while(topOpr>=0){
-		double num2 = stackNum[topNum];
-		topNum--;
-		double num1 = stackNum[topNum];
+		infoNum num2, num1;
+		popNum(&topNum, &num2);
+		popNum(&topNum, &num1);
 		char opr = stackOpr[topOpr];
 		topOpr--;
-		stackNum[topNum] = Operation(num1,num2,opr);
+		pushNum(&topNum, Operation(num1,num2,opr));
 	}
-	printf("result = %g\n", stackNum[0]);
+	printf("result = %g\n", info(topNum));
 }
 
 
