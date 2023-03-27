@@ -18,7 +18,7 @@ double logNature(double angka) // modul log natural, fungsi ini menerima sebuah 
     	temp = -(temp); //agar nilai yang negatif diubah menjadi positif
 	}
      while (temp > 1e-10) { // hingga suku terakhir sudah sangat kecil
-        hasil += temp;
+        hasil = hasil + temp;
         i++;
         temp = pangkat((angka - 1) / angka, i) / i; //menggunakan fungsi pangkat yang ada pada adi.h
     }
