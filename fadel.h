@@ -40,7 +40,7 @@ void popNum(addressNum *top,infoNum *value){
 	/*top adalah param i/o dibutuhkan untuk mengakses data pada stack*/
 	/*value adalah param output digunakan untuk mengembalikan nilai yang dikeluarkan ke pemanggil*/
 	if (*top == NULL){/*bila stack kosong maka akhiri*/
-		printf("\n--Stack Kosong--\n");
+		printf("ERROR ");
 		return;
 	}
 	addressNum temp = *top;
@@ -83,7 +83,7 @@ void popOpr(addressOpr *top,infoOpr *value){
 	/*top adalah param i/o dibutuhkan untuk mengakses data pada stack*/
 	/*value adalah param output digunakan untuk mengembalikan nilai yang dikeluarkan ke pemanggil*/
 	if (*top == NULL){/*bila stack kosong maka akhiri*/
-		printf("\n--Stack Kosong--\n");
+		printf("ERROR ");
 		return;
 	}
 	addressOpr temp = *top;

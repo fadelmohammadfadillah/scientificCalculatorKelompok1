@@ -102,15 +102,16 @@ void MenuAritmatika(){
 		}else if (str[i] == '('){
 			pushOpr(&topOpr, str[i]);
 		} else if (str[i] == ')'){
+			infoOpr opr;
+			infoNum num1;
+			infoNum num2;
 			while (infoOp(topOpr) != '('){
-				infoNum num2;
 				popNum(&topNum, &num2);
-				infoNum num1;
 				popNum(&topNum, &num1);
-				infoOpr opr;
 				popOpr(&topOpr, &opr);
 				pushNum(&topNum, Operation(num1,num2,opr));
 			}
+			popOpr(&topOpr,&opr); //pop opr '('
 		}else if(str[i] == 's' ||str[i] == 't' ||str[i] == 'c' ||str[i] == 'a'|| str[i] == 'l'){
 			//untuk operasi non-aritmatik menggunakan cara infix
 			char tempChar[10];
