@@ -65,7 +65,7 @@ double nonArithmeticOperation(double num, char opr[]){
 
 void MenuAritmatika(){
 	char str[100];
-	int i;
+	int i, flagpr = 0;
 	addressOpr topOpr;
 	addressNum topNum;
 	topNum = NULL;
@@ -101,7 +101,15 @@ void MenuAritmatika(){
 			i--;
 		}else if (str[i] == '('){
 			pushOpr(&topOpr, str[i]);
+			flagpr = 1;
 		} else if (str[i] == ')'){
+			/*Cek apakah pada ekspresi terdapat '('*/
+			if (flagpr == 0){
+				printf("\t--Invalid expression : ')' tidak ada operator '(' sebelumnya--\n");
+				topOpr = NULL;
+				i = strlen(str);
+				return;
+			}
 			infoOpr opr;
 			infoNum num1;
 			infoNum num2;
