@@ -14,7 +14,32 @@ double logBase10(double angka){
 }
 
 double logBase(double angka, double base){
-	return logNature(angka)/logNature(base);
+//	return logNature(angka)/logNature(base);
+	double x, temp, hasil = 0, sisa = 0, j = 0.0;
+	x=angka;
+    	if(x > base){
+    		while (x >= base) {
+	        	x = x/base;
+	        	hasil++;
+	    	}
+		temp=0;
+		while(temp < angka){
+			j = j+0.01;
+			temp = pow(base,hasil+j);
+		}
+		j=j-0.01;
+		hasil += j;
+	}else if(angka < base){
+		temp=0;
+		while(temp < angka){
+			j = j+0.01;
+			temp = pow(base,hasil+j);
+		}
+		hasil += j;
+	}else if(angka == base){
+		hasil = 1;
+	}
+	return hasil;
 }
 
 //
