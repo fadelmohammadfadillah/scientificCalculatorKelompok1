@@ -54,10 +54,7 @@ double nonArithmeticOperation(double num, char opr[]){
 		return HitungSec(num);
 	}else if(strcmp(opr, "cotan(")==0){
 		return HitungCotan(num);
-	}else if(strcmp(opr, "^(")==0){
-		return pangkat(num,2);
-	}
-	else {
+	}else {
 		printf("Invalid expression : %s \n", opr);
 		printf("seharusnya %s()\nError ", opr);
 	}
@@ -131,6 +128,7 @@ void MenuAritmatika(){
 				//jika ekspresi matematika sebelum log adalah angka
 				//maka dianggap logaritma basis bebas
 				beforeIsNumber = true;
+//				printf("masuk gan!");
 			}
 			while(!(isDigit(str[i]))){
 				tempChar[tempCharTop] = str[i];
@@ -152,6 +150,11 @@ void MenuAritmatika(){
 				infoNum b;
 				popNum(&topNum, &b);
 				pushNum(&topNum, logBase(x, b));
+			}else if (beforeIsNumber && strcmp(tempChar, "log(") != 0){
+				printf("\t-- %s) adalah operator prefix, tidak boleh ada angka sebelum operator tersebut--\n", tempChar);
+				topOpr = NULL;
+				i = strlen(str);
+				return;
 			}
 			else{
 				pushNum(&topNum, nonArithmeticOperation(strtod(tempNum, NULL), tempChar));
@@ -177,7 +180,7 @@ void MenuAritmatika(){
 				popOpr(&topOpr, &op);
 				pushNum(&topNum, Operation(num1,num2,op));
 			}
-			
+
 			if(isDigit(str[i+1]) == false && str[i+1] != '(' && str[i+1] != 'l' && str[i+1] != 's' && str[i+1] != 't' && str[i+1] != 'c' && str[i+1] != 'a'){
 				//jika setelah operator ada operator maka tidak valid
 				printf("ekspresi matematika tidak valid karena setelah '%c' ada '%c'\n", str[i], str[i+1]);
