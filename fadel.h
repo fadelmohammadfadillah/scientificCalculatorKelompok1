@@ -137,14 +137,6 @@ int operatorPriority(char opr){
     }
 }
 
-bool isNegative(char string[], int i){
-	if (string[i] == '-' && (string[i-1] != '+' || string[i-1] != '/' ||string[i-1] != '*' ||string[i-1] != '^')){
-		return true;
-	} else {
-		return false;
-	}
-}
-
 bool isDigit(char str){
 	if (str < '0' || str > '9'){
 		return false;
@@ -152,5 +144,15 @@ bool isDigit(char str){
 		return true;
 	}
 }
+
+bool isNegative(char string[], int i){
+	if (string[i] == '-' && !isDigit(string[i-1])){
+		return true;
+	} else {
+		return false;
+	}
+}
+
+
 
 #endif
