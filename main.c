@@ -125,17 +125,18 @@ void MenuAritmatika(){
 			int tempNumTop=0;
 			bool beforeIsNumber = false;
 			if (isDigit(str[i-1])){
-				//jika ekspresi matematika sebelum log adalah angka
-				//maka dianggap logaritma basis bebas
+				//jika ekspresi matematika sebelum operator adalah angka
+				//maka dianggap operasi infix
 				beforeIsNumber = true;
-//				printf("masuk gan!");
 			}
+			//loop untuk mendapatkan string operator
 			while(!(isDigit(str[i]))){
 				tempChar[tempCharTop] = str[i];
 				i++;
 				tempCharTop++;
 			}
 			tempChar[tempCharTop] = '\0';
+			//loop untuk mendapatkan string number
 			while (isDigit(str[i]) || str[i] == '.'){
 				tempNum[tempNumTop] = str[i];
 				i++;
@@ -143,6 +144,12 @@ void MenuAritmatika(){
 			}
 			//mengganti operator dengan character null
 			tempNum[tempNumTop] = '\0';
+			if(str[i] != ')'){
+				printf("\t--penulisan operator salah, seharusnya %s)--\n", tempChar);
+				topOpr = NULL;
+				i = strlen(str);
+				return;
+			}
 			//Pengecekan apakah operasi infix atau prefix
 			if (beforeIsNumber && strcmp(tempChar, "log(")==0){
 				//operasi logaritma basis bebas
