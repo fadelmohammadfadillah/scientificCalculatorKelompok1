@@ -24,3 +24,11 @@ double logNature(double angka) // modul log natural, fungsi ini menerima sebuah 
     }
      return hasil;
 }
+
+double Nilai_Euler(double angka){
+	
+	double hasil;
+	double e = 2.71828; //definisi nilai euler
+	hasil = angka * e;
+	printf("%5f", hasil);
+}
