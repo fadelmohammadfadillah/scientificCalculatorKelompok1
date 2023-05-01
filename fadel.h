@@ -10,6 +10,56 @@
 #define infoOp(P) (P)->opr
 #define nextOp(P) (P)->nextOpr
 
+/*Binary Tree*/
+#define data(P) (P)->data
+#define left(P) (P)->left
+#define right(P) (P)->right
+#define parent(P) (P)->parent
+
+typedef struct tNode *address;
+typedef char infotype[20];
+typedef struct tNode{
+	infotype data;
+	address left, right, parent;
+}BTNode;
+
+/*infotype fadel
+fadel = (infotype) malloc (10 * sizeof(char)*/
+
+void CreateNode(address *btr, infotype X){
+	address tr;
+	tr = (address) malloc (sizeof(BTNode));
+	if (tr != NULL){
+		strcpy(data(tr), X);
+		left(tr) = NULL;
+		right(tr) = NULL;
+		parent(tr) = NULL;
+		*btr = tr;
+	}
+}
+
+void GetPosNum (address *root, address *temp){
+	if(*root!=NULL && right(*root) != NULL){
+//				printf("tst right *root");
+		right(right(*root)) = *temp;
+		parent(*temp) = right(*root);
+	}else if (*root != NULL && right(*root)==NULL){
+//				printf("tst right");
+		right(*root) = *temp;
+		parent(*temp) = *root;
+	}else{
+		//jika *root kosong
+		*root = *temp;
+	}
+}
+
+
+
+
+
+
+
+
 /*MODUL-MODUL STACK OPERAND LINKED LIST*/
 typedef struct tStackNum* addressNum;
 typedef double infoNum;
