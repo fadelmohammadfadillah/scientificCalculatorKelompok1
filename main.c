@@ -68,7 +68,7 @@ double MenuAritmatika(char str[]){
 		if(isDigit(str[i]) || str[i] == '(' && str[i+1] == '-'){
 			char numNode[10];
 			int  numNodeTop=0;
-   			if (str[i+1] == '-'){
+   			if (str[i+1] == '-' && str[i] == '('){
    				numNode[numNodeTop++]=str[i+1];
    				i = i+2;
 			}
