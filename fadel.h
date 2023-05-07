@@ -5,10 +5,33 @@
 #include <string.h>
 #include <math.h>
 #include <malloc.h>
-#define info(P) (P)->num
-#define next(P) (P)->next
-#define infoOp(P) (P)->opr
-#define nextOp(P) (P)->nextOpr
+
+bool isDigit(char str){
+	if (str < '0' || str > '9'){
+		return false;
+	}else{
+		return true;
+	}
+}
+//-100 fadel
+bool isDigitString(char str[]){
+	if (str[0] < '0' || str[0] > '9'){
+		if (str[1] < '0' || str[1] > '9'){
+			return false;
+		}
+	}else{
+		return true;
+	}
+}
+
+bool isNegative(char string[], int i){
+	if (string[i] == '-' && !isDigit(string[i-1])){
+		return true;
+	} else {
+		return false;
+	}
+}
+
 
 /*Binary Tree*/
 #define data(P) (P)->data
@@ -38,115 +61,53 @@ void CreateNode(address *btr, infotype X){
 	}
 }
 
-void GetPosNum (address *root, address *temp){
-	if(*root!=NULL && right(*root) != NULL){
-//				printf("tst right *root");
-		right(right(*root)) = *temp;
-		parent(*temp) = right(*root);
-	}else if (*root != NULL && right(*root)==NULL){
-//				printf("tst right");
-		right(*root) = *temp;
-		parent(*temp) = *root;
-	}else{
-		//jika *root kosong
-		*root = *temp;
-	}
-}
-
-
-
-
-
-
-
-
-/*MODUL-MODUL STACK OPERAND LINKED LIST*/
-typedef struct tStackNum* addressNum;
-typedef double infoNum;
-typedef struct tStackNum {
-	infoNum num;
-	addressNum next;
-}stackNum;
-
-void pushNum(addressNum *top, infoNum value){
-	addressNum P;
-	P = (addressNum) malloc (sizeof(stackNum));/*alokasi memori sebesar adt stack*/
-	if (P==NULL){//jika alokasi tidak berhasil
+void GetPosNum (address *root, address *newNode){
+	if (*root == NULL){
+		*root = *newNode;
 		return;
 	}
-	info(P) = value;
-	next(P) = NULL;
-	if(*top ==NULL){ /*push jika stack kosong*/
-		*top = P;
-	}else{/*push jika stack tidak kosong*/
-		next(P) = *top;
-		*top = P;
+	address temp = *root;
+	while (right(temp) != NULL){
+		temp = right(temp);
 	}
+	right(temp) = *newNode;
+	parent(*newNode) = temp;
+}
+
+void GetPosOpr (address *root, address *newOpr) {
+	/*jika root adalah digit, maka newOpr menjadi root*/
+	if (isDigitString(data(*root))){
+		left(*newOpr) =*root;
+		parent(*root) = *newOpr;
+		*root = *newOpr;
+		return;
+	}
+	/*jika root tidak kosong, maka loop hingga right son
+	NULL, kemudian ubah right son dari parent terakhir
+	menjadi newOpr, kemudian right son tersebut menjadi left
+	son newOpr*/
+	address temp = *root;
+	while(temp->right != NULL){
+		temp = temp->right;
+	}
+	parent(*newOpr) = temp->parent;
+	temp->parent->right = *newOpr;
+	left(*newOpr) = temp;
+	temp->parent = *newOpr;
 	
-
 }
 
-void popNum(addressNum *top,infoNum *value){
-	/*top adalah param i/o dibutuhkan untuk mengakses data pada stack*/
-	/*value adalah param output digunakan untuk mengembalikan nilai yang dikeluarkan ke pemanggil*/
-	if (*top == NULL){/*bila stack kosong maka akhiri*/
-		printf("ERROR ");
-		return;
-	}
-	addressNum temp = *top;
-	if (next(*top) != NULL){/*Cek apabila elemen stack > 1*/
-		*top = next(*top);
-		*value = info(temp);
-		free(temp);
-	}else{/*Jika elemen stack = 1*/
-		*top = NULL;
-		*value = info(temp);
-		free(temp);
-	}
+void deallocNode(address *node){
+	left(*node) = NULL;
+	right(*node) = NULL;
+	parent(*node) = NULL;
+	free(*node);
 }
 
-/*MODUL-MODUL STACK OPERATOR LINKED LIST*/
-typedef struct tStackOpr* addressOpr;
-typedef char infoOpr;
-typedef struct tStackOpr {
-	infoOpr opr;
-	addressOpr nextOpr;
-}stackOpr;
 
-void pushOpr(addressOpr *top, infoOpr value){
-	addressOpr P;
-	P = (addressOpr) malloc (sizeof(stackOpr));/*alokasi memori sebesar adt stack*/
-	if (P==NULL){//jika alokasi tidak berhasil
-		return;
-	}
-	infoOp(P) = value;
-	nextOp(P) = NULL;
-	if(*top ==NULL){ /*push jika stack kosong*/
-		*top = P;
-	}else{/*push jika stack tidak kosong*/
-		nextOp(P) = *top;
-		*top = P;
-	}
-}
 
-void popOpr(addressOpr *top,infoOpr *value){
-	/*top adalah param i/o dibutuhkan untuk mengakses data pada stack*/
-	/*value adalah param output digunakan untuk mengembalikan nilai yang dikeluarkan ke pemanggil*/
-	if (*top == NULL){/*bila stack kosong maka akhiri*/
-		printf("ERROR ");
-		return;
-	}
-	addressOpr temp = *top;
-	if (nextOp(*top) != NULL){/*Cek apabila elemen stack > 1*/
-		*top = nextOp(*top);
-		*value = infoOp(temp);
-		free(temp);
-	}else{/*Jika elemen stack = 1*/
-		*top = NULL;
-		*value = infoOp(temp);
-		free(temp);
-	}
-}
+
+
 
 /*MODUL-MODUL ARITMATIKA DAN LAINNYA*/
 double Sum(double num1, double num2){
@@ -166,8 +127,6 @@ double Mod(double num1, double num2){
 }
 
 int operatorPriority(char opr){
-//	printf("bisa");
-//	printf("%c", opr);
 	switch (opr) {
         case '^':
 		case 'v':
@@ -187,22 +146,45 @@ int operatorPriority(char opr){
     }
 }
 
-bool isDigit(char str){
-	if (str < '0' || str > '9'){
-		return false;
-	}else{
-		return true;
+
+
+bool checkOperatorTree(address root, char str){
+	/*check operator paling bawah, karena jika operator paling bawah
+	adalah operator yang paling besar priority nya.
+	Jika operator tersebut belum di kalkulasi, maka dibandingkan dengan
+	operator sekarang prioritynya, jika lebih besar maka return true
+	untuk kemudian di operasikan.
+	Jika lebih kecil maka return false, untuk kemudian di bikin node baru
+	untuk operator yang lebih besar tersebut*/
+    char tempOpr[3];
+	address temp = root;
+	while(temp->right != NULL){
+		temp = temp->right;
+	}
+	//jika root, maka parentnya NULL
+	if (temp->parent != NULL){
+		temp = temp->parent;
+	}
+	if (!isDigitString(data(temp))){
+    	strcpy(tempOpr, data(temp));
+		if (operatorPriority(tempOpr[0]) >= operatorPriority(str)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
 
-bool isNegative(char string[], int i){
-	if (string[i] == '-' && !isDigit(string[i-1])){
-		return true;
-	} else {
-		return false;
+double enumNegativeNumberString(char str[]){
+	int i=1, n=0;
+	char tempNum[10];
+	double num;
+	while(i<strlen(str)){
+		tempNum[n++] = str[i++];
 	}
+	num = strtod(tempNum, NULL);
+	return num *= -1;
 }
-
 
 
 #endif

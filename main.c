@@ -60,147 +60,54 @@ double nonArithmeticOperation(double num, char opr[]){
 	}
 }
 
-void MenuAritmatika(){
-	char str[100];
-	int i, flagpr = 0;
-	bool is_negative =false;
-	addressOpr topOpr;
-	addressNum topNum;
+double MenuAritmatika(char str[]){
+	int i, flag = 0;
 	address root = NULL, temp;
-	topNum = NULL;
-	topOpr = NULL;
-	printf("Masukkan Ekspresi Matematika: ");
-	fflush(stdin);
-	scanf("%s", str);
 	for (i=0;i<strlen(str);i++){
-		is_negative = false;
+//		if (root!=NULL){
+//			printf("\t%s\n", root->data);
+//			if(root->right != NULL){
+//				printf("\tright son root: %s\n", root->right->data);
+//			}
+//		}
 		//cek apakah angka dan digit angka tersebut agar disatukan menjadi sebuah kesatuan angka dalam array
-		if(isDigit(str[i]) || (isNegative(str, i)&& infoOp(topOpr) == '(') ){
-			char tempNum[10];
+		if(isDigit(str[i]) || str[i] == '(' && str[i+1] == '-'){
 			char numNode[10];
-			int tempNumTop=0, numNodeTop=0;
-   			if (str[i] == '-'){
-   				is_negative = true;
-   				numNode[numNodeTop++]=str[i];
-   				i++;
+			int  numNodeTop=0;
+   			if (str[i+1] == '-'){
+   				numNode[numNodeTop++]=str[i+1];
+   				i = i+2;
 			}
 			while (isDigit(str[i]) || str[i] == '.'){ 
 			/*jika angka lebih dari 1 digit maka akan ditampung kedalam sebuah array of char*/
 			/*yang kemudian akan di typecast menggunakan strtod (string to double)*/
-				tempNum[tempNumTop] = str[i];
 				numNode[numNodeTop++] = str[i];//untuk string node tree
 				i++;
-				tempNumTop++;
 			}
 			//mengganti operator dengan character null
 			//error saat bilangan adalah negatif
-			tempNum[tempNumTop] = '\0';
 			numNode[numNodeTop] = '\0';
-			if (is_negative){
-				infoNum num = strtod(tempNum, NULL);
-				pushNum(&topNum, num*-1);
-				CreateNode(&temp, numNode);
-			}else{
-				pushNum(&topNum, strtod(tempNum, NULL));
-				CreateNode(&temp, numNode);
-			}
+			CreateNode(&temp, numNode);
 			GetPosNum(&root, &temp);
-			i--;
+			if(str[i] != ')'){
+				i--;
+			}
 		}else if (str[i] == '('){
-			pushOpr(&topOpr, str[i]);
-			flagpr = 1;
-		} else if (str[i] == ')'){
-			/*Cek apakah pada ekspresi terdapat '('*/
-			if (flagpr == 0){
-				printf("\t--Invalid expression : ')' tidak ada operator '(' sebelumnya--\n");
-				topOpr = NULL;
-				i = strlen(str);
-				return;
+			i++;
+			char tempStr[100];
+			int topTempStr =0;
+			while(str[i] != ')'){
+				tempStr[topTempStr++] = str[i++];
 			}
-			infoOpr opr;
-			infoNum num1;
-			infoNum num2;
-			while (infoOp(topOpr) != '('){
-				//operasi stack
-				popNum(&topNum, &num2);
-				popNum(&topNum, &num1);
-				popOpr(&topOpr, &opr);
-				pushNum(&topNum, Operation(num1,num2,opr));
-				
-				//operasi tree
-				char tempOpr[5];
-				strcpy(tempOpr, data(right(root)));
-				if (!isDigit(tempOpr[0])){
-					double dnum1, dnum2;
-					int angka = 1, n=0;
-					char tempNum[10];
-					//operasi jika right son root adalah operator
-					address opr = right(root);
-					address num1 = left(opr), num2 = right(opr);
-					strcpy(tempOpr, data(opr));
-					if (data(num1)[0]=='-'){
-						while(data(num1)[angka] != '\0'){
-							tempNum[n++] = data(num1)[angka++];
-						}
-						strcpy(data(num1),tempNum);
-						angka = 1;
-						n=0;
-						dnum1 = strtod(data(num1), NULL);
-						dnum1 *= -1;
-					}else{
-						dnum1 = strtod(data(num1), NULL);
-					}
-					if (data(num2)[0]=='-'){
-						while(data(num2)[angka] != '\0'){
-							tempNum[n++] = data(num2)[angka++];
-						}
-						strcpy(data(num2),tempNum);
-						angka = 1;
-						n=0;
-						dnum2 = strtod(data(num2), NULL);
-						dnum2 *= -1;
-					}else{
-						dnum2 = strtod(data(num2), NULL);
-					}
-					double result = Operation(dnum1, dnum2, (char)tempOpr[0]);
-					sprintf(data(opr), "%f", result);
-				}else{
-					double dnum1, dnum2;
-					int angka = 1, n=0;
-					char tempNum[10];
-					//operasi jika operator lebih besar dari yang di string
-					address opr = root;
-					address num1 = left(opr), num2 = right(opr);
-					strcpy(tempOpr, data(opr));
-					if (data(num1)[0]=='-'){
-						while(data(num1)[angka] != '\0'){
-							tempNum[n++] = data(num1)[angka++];
-						}
-						strcpy(data(num1),tempNum);
-						angka = 1;
-						n=0;
-						dnum1 = strtod(data(num1), NULL);
-						dnum1 *= -1;
-					}else{
-						dnum1 = strtod(data(num1), NULL);
-					}
-					if (data(num2)[0]=='-'){
-						while(data(num2)[angka] != '\0'){
-							tempNum[n++] = data(num2)[angka++];
-						}
-						strcpy(data(num2),tempNum);
-						angka = 1;
-						n=0;
-						dnum2 = strtod(data(num2), NULL);
-						dnum2 *= -1;
-					}else{
-						dnum2 = strtod(data(num2), NULL);
-					}
-					double result = Operation(dnum1, dnum2, (char)tempOpr[0]);
-					sprintf(data(opr), "%f", result);
-				}
-			}
-			popOpr(&topOpr,&opr); //pop opr '('
+			tempStr[topTempStr] = '\0';
+			double tempRes = 0;
+			tempRes = MenuAritmatika(tempStr);
+			printf("hasil dalam kurung: %f\n",tempRes);
+			char tempNum[10];
+			sprintf(tempNum, "%f", tempRes);
+			CreateNode(&temp, tempNum);
+			GetPosNum(&root, &temp);
+			
 		}else if(str[i] == 's' ||str[i] == 't' ||str[i] == 'c' ||str[i] == 'a'|| str[i] == 'l'){
 			char tempChar[10];
 			int tempCharTop = 0;
@@ -231,28 +138,21 @@ void MenuAritmatika(){
 			//pengecekan apakah cara penulisan operator sudah benar
 			if(str[i] != ')'){
 				printf("\t--penulisan operator salah, seharusnya %s)--\n", tempChar);
-				topOpr = NULL;
 				i = strlen(str);
 				return;
 			}
 			//Pengecekan apakah operasi infix atau prefix
 			if (beforeIsNumber && strcmp(tempChar, "log(")==0){
 				//operasi logaritma basis bebas
-				infoNum x = strtod(tempNum,NULL);
-				infoNum b;
-				popNum(&topNum, &b);
-				pushNum(&topNum, logBase(x, b));
 				sprintf(result, "%f", logBase(strtod(tempNum, NULL), strtod(temp->data, NULL)));
 				strcpy(temp->data, result);
 			}else if (beforeIsNumber && strcmp(tempChar, "log(") != 0){
 				//selain log, tidak boleh ada angka sebelum operator
 				printf("\t-- %s) adalah operator prefix, tidak boleh ada angka sebelum operator tersebut--\n", tempChar);
-				topOpr = NULL;
 				i = strlen(str);
 				return;
 			}
 			else{
-				pushNum(&topNum, nonArithmeticOperation(strtod(tempNum, NULL), tempChar));
 				sprintf(result, "%f", nonArithmeticOperation(strtod(tempNum, NULL), tempChar));
 				CreateNode(&temp, result);
 				//nyambungin tree
@@ -265,207 +165,111 @@ void MenuAritmatika(){
 				return;
 			}
 			char result[10];
-			infoNum num;
-			popNum(&topNum, &num);
-			pushNum(&topNum,(infoNum) faktorial(num) ) ;
 			sprintf(result, "%f", (double)faktorial(strtod(temp->data, NULL)));
 			strcpy(temp->data, result);
 		}
 		else {
 			//jika operator sebelumnya memiliki hierarki lebih tinggi maka akan dioperasikan terlebih dahulu
         	// '()' memiliki hierarki lebih rendah karena tidak akan dioperasikan pada blok kode ini
-       		while (topOpr != NULL && operatorPriority(infoOp(topOpr)) >= operatorPriority(str[i])){
-				//ketika posisi 5 node
-				char tempOpr[5];
-				strcpy(tempOpr, data(right(root)));
-				if (!isDigit(tempOpr[0])){
-					double dnum1, dnum2;
-					int angka = 1, n=0;
-					char tempNum[10];
-					//operasi jika right son root adalah operator
-					address opr = right(root);
-					address num1 = left(opr), num2 = right(opr);
-					strcpy(tempOpr, data(opr));
-					if (data(num1)[0]=='-'){
-						while(data(num1)[angka] != '\0'){
-							tempNum[n++] = data(num1)[angka++];
-						}
-						strcpy(data(num1),tempNum);
-						angka = 1;
-						n=0;
-						dnum1 = strtod(data(num1), NULL);
-						dnum1 *= -1;
-					}else{
-						dnum1 = strtod(data(num1), NULL);
-					}
-					if (data(num2)[0]=='-'){
-						while(data(num2)[angka] != '\0'){
-							tempNum[n++] = data(num2)[angka++];
-						}
-						strcpy(data(num2),tempNum);
-						angka = 1;
-						n=0;
-						dnum2 = strtod(data(num2), NULL);
-						dnum2 *= -1;
-					}else{
-						dnum2 = strtod(data(num2), NULL);
-					}
-					double result = Operation(dnum1, dnum2, (char)tempOpr[0]);
-					sprintf(data(opr), "%f", result);
-				}else{
-					double dnum1, dnum2;
-					int angka = 1, n=0;
-					char tempNum[10];
-					//operasi jika operator lebih besar dari yang di string
-					address opr = root;
-					address num1 = left(opr), num2 = right(opr);
-					strcpy(tempOpr, data(opr));
-					if (data(num1)[0]=='-'){
-						while(data(num1)[angka] != '\0'){
-							tempNum[n++] = data(num1)[angka++];
-						}
-						strcpy(data(num1),tempNum);
-						angka = 1;
-						n=0;
-						dnum1 = strtod(data(num1), NULL);
-						dnum1 *= -1;
-					}else{
-						dnum1 = strtod(data(num1), NULL);
-					}
-					if (data(num2)[0]=='-'){
-						while(data(num2)[angka] != '\0'){
-							tempNum[n++] = data(num2)[angka++];
-						}
-						strcpy(data(num2),tempNum);
-						angka = 1;
-						n=0;
-						dnum2 = strtod(data(num2), NULL);
-						dnum2 *= -1;
-					}else{
-						dnum2 = strtod(data(num2), NULL);
-					}
-					double result = Operation(dnum1, dnum2, (char)tempOpr[0]);
-					sprintf(data(opr), "%f", result);
+//        	printf("root: %s", data(root));
+       		while (!isDigitString(data(root)) || flag == 0) {
+       			if (!checkOperatorTree(root, str[i]) || root->left == NULL){
+       				break;
 				}
-				infoNum num2, num1;
-				popNum(&topNum, &num2);
-				popNum(&topNum, &num1);
-				infoOpr op;
-				popOpr(&topOpr, &op);
-				pushNum(&topNum, Operation(num1,num2,op));
+				temp = root;
+				while (temp->right != NULL){
+					temp = temp->right;
+				}
+				if (isDigitString(data(temp))){
+					address num2 = temp;
+					address opr = temp->parent;
+					address num1 = opr->left;
+					char tempOpr[3];
+					strcpy(tempOpr, data(opr));
+					double dnum1, dnum2;
+					if (data(num1)[0]=='-'){
+						dnum1 = enumNegativeNumberString(data(num1));
+					}else{
+						dnum1 = strtod(data(num1), NULL);
+					}
+					if (data(num2)[0]=='-'){
+						dnum2 = enumNegativeNumberString(data(num2));
+					}else{
+						dnum2 = strtod(data(num2), NULL);
+					}
+					printf("DIATAS num1: %f, num2: %f, Oprator: %c", dnum1,dnum2, tempOpr[0]);
+					double result = Operation(dnum1, dnum2, (char)tempOpr[0]);
+					sprintf(data(opr), "%f", result);
+					deallocNode(&num1);
+					deallocNode(&num2);
+					opr->right = NULL;
+					opr->left = NULL;
+				}
 			}
 
-			if(isDigit(str[i+1]) == false && str[i+1] != '(' && str[i+1] != 'l' && str[i+1] != 's' && str[i+1] != 't' && str[i+1] != 'c' && str[i+1] != 'a'){
+			if(!isDigit(str[i+1]) && str[i+1] != '(' && str[i+1] != 'l' && str[i+1] != 's' && str[i+1] != 't' && str[i+1] != 'c' && str[i+1] != 'a'){
 				//jika setelah operator ada operator maka tidak valid
 				printf("ekspresi matematika tidak valid karena setelah '%c' ada '%c'\n", str[i], str[i+1]);
 				return;
 			}
 			char opr[2];
-			pushOpr(&topOpr, str[i]);
 			opr[0] = str[i];
 			opr[1] = '\0';
 			CreateNode(&temp, opr);
-			if (isDigit(data(root)[0]) || data(root)[0] == '-' && isDigit(data(root)[1])){
-				//jika root adalah digit / angka
-				parent(root) = temp;
-				left(temp) = root;
-				root = temp;
-			}else{
-				//kondisi jika operator di root lebih kecil dari operator yg akan ditambah
-				//misal opr root = '+', opr saat ini = '*'
-				//maka tree 5 node
-				//misalnya 1+2*3
-				parent(right(root)) = temp;
-				left(temp) = right(root);
-				right(root) = temp;
-				parent(temp) = root;
-			}
+			GetPosOpr(&root, &temp);
+			flag = 1;
 		}
 	}
-	while(topOpr != NULL){
-		if (!isDigit(data(right(root))[0])){
-			int angka = 1, n=0;
-			char tempNum[10];
+	while(isDigitString(data(root)) == false){
+		printf("\troot: %s\n", data(root));
+		printf("\tbooelan digit string: %d\n", isDigitString(data(root)));
+		temp = root;
+		while (temp->right != NULL){
+			temp = temp->right;
+		}
+		if (temp == root){
+			break;
+		}
+		printf("\n\ttemp left: %s\n", temp->data);
+		if(isDigitString(temp->data)){
+			address num2 = temp;
+			address opr = temp->parent;
+			address num1 = opr->left;
 			double dnum1,dnum2;
-			//operasi jika right son root adalah operator
-			address opr = right(root);
-			address num1 = left(opr), num2 = right(opr);
 			if (data(num1)[0]=='-'){
-				while(data(num1)[angka] != '\0'){
-					tempNum[n++] = data(num1)[angka++];
-				}
-				strcpy(data(num1),tempNum);
-				angka = 1;
-				n=0;
-				dnum1 = strtod(data(num1), NULL);
-				dnum1 *= -1;
+				dnum1 = enumNegativeNumberString(data(num1));
 			}else{
 				dnum1 = strtod(data(num1), NULL);
 			}
 			if (data(num2)[0]=='-'){
-				while(data(num2)[angka] != '\0'){
-					tempNum[n++] = data(num2)[angka++];
-				}
-				strcpy(data(num2),tempNum);
-				angka = 1;
-				n=0;
-				dnum2 = strtod(data(num2), NULL);
-				dnum2 *= -1;
+				dnum2 = enumNegativeNumberString(data(num2));
 			}else{
 				dnum2 = strtod(data(num2), NULL);
 			}
+			printf("DIBAWAH num1: %f, num2: %f, Oprator: %c\n", dnum1,dnum2, data(opr)[0]);
 			double result = Operation(dnum1, dnum2, data(opr)[0]);
 			sprintf(data(opr), "%f", result);
-		}else{
-			int angka = 1, n=0;
-			char tempNum[10];
-			double dnum1, dnum2;
-			//operasi jika operator lebih besar dari yang di string
-			address opr = root;
-			address num1 = left(opr), num2 = right(opr);
-			if (data(num1)[0]=='-'){
-				while(data(num1)[angka] != '\0'){
-					tempNum[n++] = data(num1)[angka++];
-				}
-				strcpy(data(num1),tempNum);
-				angka = 1;
-				n=0;
-				dnum1 = strtod(data(num1), NULL);
-				dnum1 *= -1;
-			}else{
-				dnum1 = strtod(data(num1), NULL);
-			}
-			if (data(num2)[0]=='-'){
-				while(data(num2)[angka] != '\0'){
-					tempNum[n++] = data(num2)[angka++];
-				}
-				strcpy(data(num2),tempNum);
-				angka = 1;
-				n=0;
-				dnum2 = strtod(data(num2), NULL);
-				dnum2 *= -1;
-			}else{
-				dnum2 = strtod(data(num2), NULL);
-			}
-			double result = Operation(dnum1, dnum2, data(opr)[0]);
-			sprintf(data(opr), "%f", result);
+			deallocNode(&num1);
+			deallocNode(&num2);
+			opr->right = NULL;
+			opr->left = NULL;
 		}
-		infoNum num2, num1;
-		popNum(&topNum, &num2);
-		popNum(&topNum, &num1);
-		infoOpr op;
-		popOpr(&topOpr, &op);
-		pushNum(&topNum, Operation(num1,num2,op));
 	}
-	printf("result = %g\n", info(topNum));
-	printf("result tree = %s\n", data(root));
+	double res;
+	res = strtod(data(root),NULL);
+	return res;
 }
 
 
 int main (){
-	char choice = 'Y';
+	char choice = 'Y', str[100];
+	double result = 0;
 	do{
-	    MenuAritmatika();
+		printf("Masukkan Ekspresi Matematika: ");
+		fflush(stdin);
+		scanf("%s", str);
+	    result = MenuAritmatika(str);
+	    printf("di main result tree = %f\n", result);
 		printf("Apakah anda ingin melanjutkan? Y/T \n");
 		scanf(" %c",&choice);
 		getchar();
