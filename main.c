@@ -87,16 +87,23 @@ double MenuAritmatika(char str[]){
 				i--;
 			}
 		}else if (str[i] == '('){
+			int flagPr = 0, flagPr2 = 0;
 			i++;
 			char tempStr[100];
 			int topTempStr =0;
-			while(str[i] != ')'){
+			while(str[i] != ')' || flagPr>0){
+				if(str[i] == '('){
+					flagPr += 1;
+				}
+				if(str[i] == ')'){
+					flagPr -= 1;
+				}
 				tempStr[topTempStr++] = str[i++];
 			}
 			tempStr[topTempStr] = '\0';
 			double tempRes = 0;
 			tempRes = MenuAritmatika(tempStr);
-			printf("hasil dalam kurung: %f\n",tempRes);
+//			printf("hasil dalam kurung: %f\n",tempRes);
 			char tempNum[10];
 			sprintf(tempNum, "%f", tempRes);
 			CreateNode(&temp, tempNum);
