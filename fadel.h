@@ -70,6 +70,11 @@ void GetPosNum (address *root, address *newNode){
 	while (right(temp) != NULL){
 		temp = right(temp);
 	}
+	if(isDigitString(temp->data)){
+		printf("Setelah angka masukan operator terlebih dahulu!\n");
+		printf("ERROR ");
+		return;
+	}
 	right(temp) = *newNode;
 	parent(*newNode) = temp;
 }
