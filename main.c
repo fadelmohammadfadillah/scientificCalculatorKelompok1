@@ -64,12 +64,6 @@ double MenuAritmatika(char str[]){
 	int i, flag = 0;
 	address root = NULL, temp;
 	for (i=0;i<strlen(str);i++){
-//		if (root!=NULL){
-//			printf("\t%s\n", root->data);
-//			if(root->right != NULL){
-//				printf("\tright son root: %s\n", root->right->data);
-//			}
-//		}
 		//cek apakah angka dan digit angka tersebut agar disatukan menjadi sebuah kesatuan angka dalam array
 		if(isDigit(str[i]) || str[i] == '(' && str[i+1] == '-'){
 			char numNode[10];
@@ -197,7 +191,6 @@ double MenuAritmatika(char str[]){
 					}else{
 						dnum2 = strtod(data(num2), NULL);
 					}
-					printf("DIATAS num1: %f, num2: %f, Oprator: %c", dnum1,dnum2, tempOpr[0]);
 					double result = Operation(dnum1, dnum2, (char)tempOpr[0]);
 					sprintf(data(opr), "%f", result);
 					deallocNode(&num1);
@@ -221,8 +214,6 @@ double MenuAritmatika(char str[]){
 		}
 	}
 	while(isDigitString(data(root)) == false){
-		printf("\troot: %s\n", data(root));
-		printf("\tbooelan digit string: %d\n", isDigitString(data(root)));
 		temp = root;
 		while (temp->right != NULL){
 			temp = temp->right;
@@ -230,7 +221,6 @@ double MenuAritmatika(char str[]){
 		if (temp == root){
 			break;
 		}
-		printf("\n\ttemp left: %s\n", temp->data);
 		if(isDigitString(temp->data)){
 			address num2 = temp;
 			address opr = temp->parent;
@@ -246,7 +236,6 @@ double MenuAritmatika(char str[]){
 			}else{
 				dnum2 = strtod(data(num2), NULL);
 			}
-			printf("DIBAWAH num1: %f, num2: %f, Oprator: %c\n", dnum1,dnum2, data(opr)[0]);
 			double result = Operation(dnum1, dnum2, data(opr)[0]);
 			sprintf(data(opr), "%f", result);
 			deallocNode(&num1);
@@ -269,7 +258,7 @@ int main (){
 		fflush(stdin);
 		scanf("%s", str);
 	    result = MenuAritmatika(str);
-	    printf("di main result tree = %f\n", result);
+	    printf("result = %f\n", result);
 		printf("Apakah anda ingin melanjutkan? Y/T \n");
 		scanf(" %c",&choice);
 		getchar();
