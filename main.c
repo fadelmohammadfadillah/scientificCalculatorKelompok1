@@ -91,7 +91,7 @@ double MenuAritmatika(char str[]){
 			i++;
 			char tempStr[100];
 			int topTempStr =0;
-			while(str[i] != ')' || flagPr>0){
+			while(str[i] != ')' || flagPr>0 && i < strlen(str)){
 				if(str[i] == '('){
 					flagPr += 1;
 				}
@@ -99,6 +99,10 @@ double MenuAritmatika(char str[]){
 					flagPr -= 1;
 				}
 				tempStr[topTempStr++] = str[i++];
+			}
+			if (flagPr != 0){
+				printf("ekspresi matematika tidak valid karena setelah '(' ada ')'\n");
+				return;
 			}
 			tempStr[topTempStr] = '\0';
 			double tempRes = 0;
