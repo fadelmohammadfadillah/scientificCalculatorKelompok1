@@ -2,44 +2,68 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "reno.h"
+#define iterasiLog 0.00001
 
 double logBase10(double angka){
-	double hasil;
-	hasil = 0;
-	while (angka >= 10) {
-        angka = angka/10;
-        hasil++;
+	/*
+	temp : var untuk penampungan hasil sementara untuk mencari pangkat yang mendekati angka yang ada di parameter
+	hasil : var untuk menampung untuk hasil
+	j : var untuk menampung looping dari pangkat koma
+	x : var untuk menampung angka yang dimasukan user agar angka tidak berubah saat membagi dengan 10
+	*/
+	double hasil = 0, temp = 0, j=0, x;
+	if(angka<=0){
+		printf("Error ");
+		return 0;
+	}
+	x=angka;
+	while (x >= 10) {//perulangan selama x lebih dari atau sama dengan 10
+        x = x/10;
+        hasil++;//maka hasil ditambah 1
     }
-	return hasil;	
+    if(x != 1){//Jika setelah dibagi masih ada sisa
+	    while(temp < angka){//maka lakukan perulangan hingga var temp lebih atau sama dengan var angka
+	    	j = j+iterasiLog;//setiap looping j ditambahkan dengan iterasi
+	    	temp = pangkat(10, hasil+j);//temp diisi dengan hasil dari 10 pangkat hasil+j
+		}
+	}
+	return hasil += j;
 }
 
 double logBase(double angka, double base){
 //	return logNature(angka)/logNature(base);
-	double x, temp, hasil = 0, sisa = 0, j = 0.0;
-	x=angka;
-    	if(x > base){
-    		while (x >= base) {
-	        	x = x/base;
-	        	hasil++;
-	    	}
-		temp=0;
-		while(temp < angka){
-			j = j+0.01;
-			temp = pow(base,hasil+j);
-		}
-		j=j-0.01;
-		hasil += j;
-	}else if(angka < base){
-		temp=0;
-		while(temp < angka){
-			j = j+0.01;
-			temp = pow(base,hasil+j);
-		}
-		hasil += j;
-	}else if(angka == base){
-		hasil = 1;
+	/*
+	temp : var untuk penampungan hasil sementara untuk mencari pangkat yang mendekati angka yang dimasukan user
+	hasil : var untuk menampung untuk hasil
+	j : var untuk menampung pangkat yang mendekati angka yang dimasukan user
+	x : var untuk menampung angka yang dimasukan user agar angka tidak berubah saat membagi dengan base
+	*/
+	if(angka<=0 || base<=0){
+		printf("Error ");
+		return 0;
 	}
-	return hasil;
+	double x, temp, hasil = 0, j = 0.0;
+	x=angka;
+	if(angka == base){//Jika angka == base maka return 1
+		return 1;
+	}else if(angka > base){
+		while (x >= base) {//perulangan selama x lebih dari atau sama dengan base
+        x = x/base;
+        hasil++;//maka hasil ditambah 1
+    	}
+    }
+    if(x != 1){//Jika setelah dibagi masih ada sisa
+	    while(temp < angka){//maka lakukan perulangan hingga var hingga temp lebih atau sama dengan var angka
+	    	j = j+iterasiLog;//setiap looping j ditambahkan dengan iterasi
+	    	temp = pangkat(base, hasil+j);//temp diisi dengan hasil dari base pangkat hasil+j
+		}
+	}
+	if(angka < base){
+		printf("masuk");
+		return hasil += j - iterasiLog;
+	}else{
+		return hasil += j;
+	}
 }
 
 //
