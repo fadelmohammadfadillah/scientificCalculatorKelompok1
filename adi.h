@@ -10,29 +10,18 @@ int faktorial(int angka);
 
 double pangkat(double angka, double pangkat){
 	int i;
-	double pangkatDes, pangkatBulat, hasil = 1;
-	double hasilPangkatDes = 1, hasilPangkatBulat = 1; //untuk menyimpan hasil perpangkatan.
-	//memisahkan desimal dengan bulatnya
-	double PangkatKurangDariSatu = pangkat; 
+	double hasil = 1;
 	if (pangkat == (int) pangkat){
 		for (i = 1; i <= pangkat; i++) { //Loop sampai "i" kurang dari atau sama dengan nilai "pangkat".
 			hasil *= angka; //var "hasil" akan dikalikan dengan "angka" dan hasilnya di simpan di var "hasil".c
 		}
 	}
 	else {
-		while(PangkatKurangDariSatu > 1){
-			PangkatKurangDariSatu--;
+		pangkat = pangkat * 10;
+		for (i = 1; i <= pangkat; i++) { //pangkat desimal
+			hasil *= angka;
 		}
-		pangkatDes = PangkatKurangDariSatu * 10;
-		for (i = 1; i <= pangkatDes; i++) { //pangkat desimal
-			hasilPangkatDes *= angka;
-		}
-		hasilPangkatDes = akar(hasilPangkatDes, 10);
-		pangkatBulat = (int) pangkat; //pangkat bulatc
-		for (i = 1; i <= pangkatBulat; i++) { 
-			hasilPangkatBulat *= angka;
-		}
-		hasil = hasilPangkatDes * hasilPangkatBulat;
+		hasil = akar(hasil, 10);
 	}
 	return hasil;
 }
