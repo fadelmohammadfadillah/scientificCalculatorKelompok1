@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "adi.h"
 
-double LogNature(double angka) // modul log natural, fungsi ini menerima sebuah argumen berupa bilangan yang akan dihitung logaritma basis e nya, dengan parameter angka berjenis input
+double logNature(double angka) // modul log natural, fungsi ini menerima sebuah argumen berupa bilangan yang akan dihitung logaritma basis e nya, dengan parameter angka berjenis input
 	{ 
 	 if (angka <= 0) {
      	printf("[ERROR]: Argumen harus lebih dari 0");
