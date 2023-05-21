@@ -9,42 +9,53 @@ int faktorial(int angka);
 //end modul
 
 double pangkat(double angka, double pangkat){
-	int i;
-	double hasil = 1;
-	if (pangkat == (int) pangkat){
-		for (i = 1; i <= pangkat; i++) { //Loop sampai "i" kurang dari atau sama dengan nilai "pangkat".
-			hasil *= angka; //var "hasil" akan dikalikan dengan "angka" dan hasilnya di simpan di var "hasil".c
+	/* Modul ini merupakan implementasi fungsi pangkat untuk menghitung hasil pangkat dari suatu angka.
+	Fungsi pangkat menerima dua parameter bertipe double yaitu "angka" yang merupakan angka yang akan dipangkatkan, dan "pangkat" yang merupakan nilai pangkatnya.
+	Variabel "hasil" digunakan untuk menyimpan hasil pangkat.*/
+	int i; /* Variabel "i" digunakan sebagai penghitung iterasi dalam loop.*/
+	double hasil = 1; /* Menginisialisasi variabel "hasil" dengan nilai awal 1*/
+	/* Pangkat Bulat*/
+	if (pangkat == (int) pangkat){ /* Mengecek apakah nilai "pangkat" merupakan bilangan bulat atau bukan. Jika iya, maka akan masuk kondisi ini*/
+		for (i = 1; i <= pangkat; i++){ /* Akan menggunakan loop "for" untuk mengulang dari 1 hingga "i" kurang dari sama dengan "pangkat".*/
+			hasil *= angka; /* Pada setiap iterasi, variabel "hasil" akan dikalikan dengan nilai "angka" dan hasilnya akan disimpan kembali di variabel "hasil".*/
 		}
 	}
-	else {
-		pangkat = pangkat * 10;
-		for (i = 1; i <= pangkat; i++) { //pangkat desimal
-			hasil *= angka;
+	/* Pangkat Desimal*/
+	else { /* Jika "pangkat" bukan bilangan bulat, maka akan masuk kondisi ini*/
+		pangkat = pangkat * 10; /* Variabel "pangkat" akan dikalikan dengan 10 agar nilai pangkat menjadi pangkat bulat.*/
+		for (i = 1; i <= pangkat; i++){ /* Akan menggunakan loop "for" untuk mengulang dari 1 hingga "i" kurang dari sama dengan "pangkat".*/
+			hasil *= angka; /* Pada setiap iterasi, variabel "hasil" akan dikalikan dengan nilai "angka" dan hasilnya akan disimpan kembali di variabel "hasil".*/
 		}
-		hasil = akar(hasil, 10);
+		hasil = akar(hasil, 10); /* Dilakukan perhitungan akar pangkat pada nilai "hasil" dengan pangkat 10 kemudian di simpan di variabel "hasil"*/
 	}
-	return hasil;
+	return hasil; /* Nilai "hasil" akan dikembalikan sebagai hasil pangkat.*/
 }
 
-double akar(double angka, double pangkatAkar) {
-    double hasil = 1.0;
-    double pangkatAkarN = 1.0/pangkatAkar;
-    int i;
-    for (i = 0; i < 100; i++) {
-        hasil = (pangkatAkar - 1) * hasil + angka / pangkat(hasil, pangkatAkar - 1);
-        hasil *= pangkatAkarN;
+double akar(double angka, double pangkatAkar){
+	/* Modul ini merupakan implementasi fungsi akar untuk menghitung akar dari suatu angka dengan menggunakan metode iterasi.
+	Fungsi akar menerima dua parameter bertipe double "angka" dan "pangkatAkar" yang merupakan angka yang akan dihitung akarnya dan pangkat akar yang diinginkan.
+	Variabel "hasil" digunakan untuk menyimpan hasil perhitungan akar.*/
+    double hasil = 1; /* Menginisialisasi variabel "hasil" dengan nilai awal 1*/
+    double pangkatAkarN = 1/pangkatAkar; /* Menghitung nilai pangkat akar invers (1/pangkatAkar) dan menyimpannya di variabel "pangkatAkarN".*/
+    int i; /* Variabel "i" digunakan sebagai penghitung iterasi dalam loop.*/
+    for (i = 0; i < 100; i++){ /* Menggunakan loop "for" untuk melakukan iterasi sebanyak 100 kali. (semakin banyak iterasi yang di lakukan maka akan mendapatkan nilai yang semakin mendekati hasil sebenarnya)*/ 
+        hasil = (pangkatAkar - 1) * hasil + angka / pangkat(hasil, pangkatAkar - 1); /* Pada setiap iterasi, variabel "hasil" diupdate dengan rumus (pangkatAkar - 1) * hasil + angka / pangkat(hasil, pangkatAkar - 1).*/
+        hasil *= pangkatAkarN; /* Variabel "hasil" dikalikan dengan pangkatAkarN kemudian akan disimpan di variabel "hasil".*/
     }
-    return hasil;
+    return hasil; /* Nilai "hasil" akan dikembalikan sebagai hasil akar.*/
 }
 
 
 int faktorial(int angka){
-	int hasil = 1; //untuk menyimpan hasil faktorial
-	int i;
-    for(i = 1; i <= angka; i++){ //Loop sampai "i" kurang dari atau sama dengan nilai "angka".
-        hasil *= i; //var "hasil" akan dikalikan dengan "i" dan hasilnya di simpan di var "hasil".
+	/* Modul ini merupakan implementasi fungsi faktorial untuk menghitung faktorial dari suatu angka.
+	Fungsi faktorial menerima satu parameter bertipe integer "angka" yang merupakan angka yang akan dihitung faktorialnya.
+	Variabel "hasil" digunakan untuk menyimpan hasil faktorial.*/
+	int hasil = 1; /* Menginisialisasi variabel "hasil" dengan nilai awal 1.*/
+	int i; /* Variabel "i" digunakan sebagai penghitung iterasi dalam loop.*/
+    for(i = 1; i <= angka; i++){ /* Menggunakan loop "for" untuk mengulang dari 1 hingga kurang dari sama dengan "angka". */
+        hasil *= i; /* Pada setiap iterasi, variabel "hasil" akan dikalikan dengan nilai "i" dan hasilnya akan disimpan kembali di variabel "hasil".*/
     }
-	return hasil;	
+	return hasil; /* Nilai "hasil" akan dikembalikan sebagai hasil faktorial.*/
 }
 
 #endif
