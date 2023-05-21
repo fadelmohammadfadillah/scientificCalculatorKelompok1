@@ -6,7 +6,7 @@
 //#include "reno.h"
 //#include "adi.h"
 #include "adrian.h"
-#include "alya1.h"
+//#include "alya1.h"
 #include "rafi.h"
 
 double Operation(double num1, double num2, char opr) {

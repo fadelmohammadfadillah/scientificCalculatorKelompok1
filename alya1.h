@@ -38,9 +38,15 @@ double kosinus(double x) {
     }
     return hasil;
 }
+
 double tangen(double x) { // fungsi tangen dalam radian
-		return sinus(x) / kosinus(x);		
+	if ( x == PI / 2 || x == 3*PI /2){
+		printf("Nilai tak terdefinisi (undefined) \n");
+	}else{
+		return sinus(x) / kosinus(x);
+	}		
 }
+
 double HitungCosec(double derajat) {
     double rad = derajat * PI / 180;
     double sin_val = sinus(rad);
@@ -76,12 +82,12 @@ double HitungSec(double derajat) {
 }
 double HitungCotan(double derajat) {
     double rad = derajat * PI / 180;
-    double tan_val = tangen(rad);
+    double tan_val = sinus(rad) / kosinus(rad);
 
     // Memeriksa kondisi tak terdefinisi
     if (tan_val == 0) {
         printf("Nilai tak terdefinisi (undefined) untuk cotan(%lf)\n", derajat);
-        return 0.0;
+        return 0;
     } else {
     	if (derajat == 180 || derajat == 360){
         	printf("Nilai tak terdefenisi (undefined) untuk cosec(%lf)\n", derajat);
