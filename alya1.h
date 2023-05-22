@@ -108,16 +108,15 @@ double HitungCotan(double derajat) {
     }
 }
 
-//program untuk invers trigonometri
-
+// Fungsi untuk menghitung invers sinus
 double Inverse_Sin(double angka) {
-    double batas_bawah = -1.57;
-    double batas_atas = 1.57;
-    double toleransi = 0.00001;
-    double tebakan = (batas_atas + batas_bawah) / 2.0;
-    double nilai = sinus(tebakan);
+    double batas_bawah = -1.57; // Batas bawah dalam radian
+    double batas_atas = 1.57; // Batas atas dalam radian
+    double toleransi = 0.00001; // Toleransi perbedaan nilai
+    double tebakan = (batas_atas + batas_bawah) / 2.0; // Tebakan awal
+    double nilai = sinus(tebakan); // Nilai sinus dari tebakan
 
-	//penggunaan binary search dimana dibagi dua kategori
+    // Metode binary search
     while ((nilai - angka) > toleransi || (angka - nilai) > toleransi) {
         if (nilai > angka) {
             batas_atas = tebakan;
@@ -128,20 +127,18 @@ double Inverse_Sin(double angka) {
         nilai = sinus(tebakan);
     }
 
-    return tebakan * 180.0 / PI;
+    return tebakan * 180.0 / PI; // Mengembalikan hasil dalam derajat
 }
 
+// Fungsi untuk menghitung invers kosinus
 double Inverse_Cos(double angka) {
-    double batas_bawah = 0.0;
-    double batas_atas = 1.57;
-    double toleransi = 0.00001;
-    double tebakan = (batas_atas + batas_bawah) / 2.0;
-    double nilai = kosinus(tebakan);
-    //terlalu banyak iterasi membuat programlebih lambat
-    int max_iterasi = 100;
-    int iterasi = 0;
+    double batas_bawah = 0.0; // Batas bawah dalam radian
+    double batas_atas = 1.57; // Batas atas dalam radian
+    double toleransi = 0.00001; // Toleransi perbedaan nilai
+    double tebakan = (batas_atas + batas_bawah) / 2.0; // Tebakan awal
+    double nilai = kosinus(tebakan); // Nilai kosinus dari tebakan
 
-	//penggunaan binary search dimana dibagi dua kategori
+    // Metode binary search
     while ((nilai - angka) > toleransi || (angka - nilai) > toleransi) {
         if (nilai > angka) {
             batas_atas = tebakan;
@@ -150,34 +147,40 @@ double Inverse_Cos(double angka) {
         }
         tebakan = (batas_atas + batas_bawah) / 2.0;
         nilai = kosinus(tebakan);
+    }
+
+    return tebakan * 180.0 / PI; // Mengembalikan hasil dalam derajat
+}
+
+double Inverse_Tan(double angka) {
+    double tol = 0.00001; // Toleransi perbedaan nilai
+    double batas_bawah = -PI / 2.0;
+    double batas_atas = PI / 2.0;
+    double tebakan = (batas_atas + batas_bawah) / 2.0; // Tebakan awal
+    double delta = tebakan - angka;
+    int iterasi = 0; // Jumlah iterasi
+
+    while (delta > tol || delta < -tol) {
+        double tan_val = tangen(tebakan);
+        if (tan_val > angka) {
+            batas_atas = tebakan;
+        } else {
+            batas_bawah = tebakan;
+        }
+        tebakan = (batas_atas + batas_bawah) / 2.0;
+        delta = tebakan - angka;
+
         iterasi++;
+		if (iterasi >= 1000) {
+            printf("");
+            break;
+        }
     }
 
     return tebakan * 180.0 / PI;
 }
 
-double Inverse_Tan(double angka){
-    double batas_atas = PI / 2.0;
-    double batas_bawah = -PI / 2.0;
-    double inverse = (batas_atas + batas_bawah) / 2.0;
-    int iterations = 10;	//10 kali iterasi pencarian nilai 
-    int i;
 
-	//penggunaan binary search dimana dibagi dua kategori
-    for (i = 0; i < iterations; i++) {
-        double tan_val = tan(inverse * PI / 180.0);
-        /*jika nilai tangent lebih besar dr angka yg ingin dicari maka batas atas diganti*/
-        if (tan_val > angka) {
-            batas_atas = inverse;
-        } else { //jika sebalikaya batas bawah diganti
-            batas_bawah = inverse;
-        }
-        inverse = (batas_atas + batas_bawah) / 2.0;
-        //nilai invers rata rata dari batas bawah dan atas
-    }
-	//mengembalikan dalam bentuk derajat
-    return inverse * 180.0 / PI;
-}
 
 #endif
 
