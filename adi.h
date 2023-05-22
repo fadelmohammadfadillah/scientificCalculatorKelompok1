@@ -39,7 +39,7 @@ double akar(double angka, double pangkatAkar){ /* Metode Newthon-Raphson*/
     double pangkatAkarN = 1/pangkatAkar; /* Menghitung nilai pangkat akar invers (1/pangkatAkar) dan menyimpannya di variabel "pangkatAkarN".*/
     int i; /* Variabel "i" digunakan sebagai penghitung iterasi dalam loop.*/
     for (i = 0; i < 100; i++){ /* Menggunakan loop "for" untuk melakukan iterasi sebanyak 100 kali. (semakin banyak iterasi yang di lakukan maka akan mendapatkan nilai yang semakin mendekati hasil sebenarnya)*/ 
-        hasil = ((pangkatAkar - 1) * hasil + angka / pangkat(hasil, pangkatAkar - 1) * pangkatAkarN); /* Pada setiap iterasi, variabel "hasil" diupdate dengan rumus ((pangkatAkar - 1) * hasil + angka / pangkat(hasil, pangkatAkar - 1) * pangkatAkarN).*/
+        hasil = (((pangkatAkar - 1) * hasil + angka / pangkat(hasil, pangkatAkar - 1)) * pangkatAkarN); /* Pada setiap iterasi, variabel "hasil" diupdate dengan rumus ((pangkatAkar - 1) * hasil + angka / pangkat(hasil, pangkatAkar - 1) * pangkatAkarN).*/
     }
     return hasil; /* Nilai "hasil" akan dikembalikan sebagai hasil akar.*/
 }
