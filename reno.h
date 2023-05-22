@@ -22,17 +22,10 @@ double LogNature(double angka) // modul log natural, fungsi ini menerima sebuah 
      return hasil;
 }
 
-int main() {
-    double angka, hasil;
-
-    printf("Masukkan angka: ");
-    scanf("%lf", &angka);
-
-    hasil = LogNature(angka);
-
-    if (hasil != -1) {
-        printf("Hasil log natural dari %.2f adalah %.8lf\n", angka, hasil);
-    }
-
-    return 0;
+double Nilai_Euler(double angka){
+	
+	double hasil;
+	double e = 2.71828; //definisi nilai euler
+	hasil = angka * e;
+	printf("%5f", hasil);
 }
