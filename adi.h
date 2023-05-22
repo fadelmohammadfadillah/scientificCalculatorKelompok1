@@ -31,7 +31,7 @@ double pangkat(double angka, double pangkat){
 	return hasil; /* Nilai "hasil" akan dikembalikan sebagai hasil pangkat.*/
 }
 
-double akar(double angka, double pangkatAkar){
+double akar(double angka, double pangkatAkar){ /* Metode Newthon-Raphson*/
 	/* Modul ini merupakan implementasi fungsi akar untuk menghitung akar dari suatu angka dengan menggunakan metode iterasi.
 	Fungsi akar menerima dua parameter bertipe double "angka" dan "pangkatAkar" yang merupakan angka yang akan dihitung akarnya dan pangkat akar yang diinginkan.
 	Variabel "hasil" digunakan untuk menyimpan hasil perhitungan akar.*/
