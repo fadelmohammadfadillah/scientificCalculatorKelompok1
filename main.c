@@ -61,13 +61,21 @@ double nonArithmeticOperation(double num, char opr[]){
 }
 
 double MenuAritmatika(char str[]){
+	/*
+	INPUT berupa string character berisikan ekspresi matematika
+	OUTPUT berupa hasil kalkulasi bertipe double
+	AUTHOR: fadel
+	MODIFAN udah di modif dari kalkulator scientific untuk stack, diubah menjadi tree
+	*/
 	int i, flag = 0;
 	address root = NULL, temp;
+	//looping seluruh str[] char 
 	for (i=0;i<strlen(str);i++){
 		//cek apakah angka dan digit angka tersebut agar disatukan menjadi sebuah kesatuan angka dalam array
 		if(isDigit(str[i]) || str[i] == '(' && str[i+1] == '-'){
 			char numNode[10];
 			int  numNodeTop=0;
+			//cek apabila digit berupa negatif
    			if (str[i+1] == '-' && str[i] == '('){
    				numNode[numNodeTop++]=str[i+1];
    				i = i+2;
@@ -79,19 +87,24 @@ double MenuAritmatika(char str[]){
 				i++;
 			}
 			//mengganti operator dengan character null
-			//error saat bilangan adalah negatif
 			numNode[numNodeTop] = '\0';
+			//membuat node tree
 			CreateNode(&temp, numNode);
+			//menyesuaikan posisi dari number pada node tree
 			GetPosNum(&root, &temp);
+			//cek apabila tutup kurung
 			if(str[i] != ')'){
 				i--;
 			}
 		}else if (str[i] == '('){
-			int flagPr = 0, flagPr2 = 0;
+			int flagPr = 0;
 			i++;
 			char tempStr[100];
 			int topTempStr =0;
-			while(str[i] != ')' || flagPr>0 && i < strlen(str)){
+			//looping string untuk
+			//flagPr adalah flag untuk mengecek banyaknya tanda kurung atau parenthesis, 
+			//dan memastikan bila setiap tanda kurung berpasangan
+			while((str[i] != ')'|| flagPr>0 )&& i < strlen(str)){
 				if(str[i] == '('){
 					flagPr += 1;
 				}
@@ -100,19 +113,21 @@ double MenuAritmatika(char str[]){
 				}
 				tempStr[topTempStr++] = str[i++];
 			}
+			//jika flagPr != 0 artinya tanda kurung tidak berpasangan
 			if (flagPr != 0){
 				printf("ekspresi matematika tidak valid karena setelah '(' ada ')'\n");
 				return;
 			}
 			tempStr[topTempStr] = '\0';
 			double tempRes = 0;
+			//string tanda kurung dibuat rekursif
 			tempRes = MenuAritmatika(tempStr);
 //			printf("hasil dalam kurung: %f\n",tempRes);
 			char tempNum[10];
 			sprintf(tempNum, "%f", tempRes);
 			CreateNode(&temp, tempNum);
 			GetPosNum(&root, &temp);
-			
+		//untuk mengecek operasi a/sin,a/cos,a/tan,log
 		}else if(str[i] == 's' ||str[i] == 't' ||str[i] == 'c' ||str[i] == 'a'|| str[i] == 'l'){
 			char tempChar[10];
 			int tempCharTop = 0;
@@ -158,11 +173,13 @@ double MenuAritmatika(char str[]){
 				return;
 			}
 			else{
+				//operasi operator postfix
 				sprintf(result, "%f", nonArithmeticOperation(strtod(tempNum, NULL), tempChar));
 				CreateNode(&temp, result);
 				//nyambungin tree
 				GetPosNum(&root, &temp);
 			}
+		//operasi untuk faktorial
 		}else if (str[i] =='!'){
 			if(isDigit(str[i+1])){
 				//jika setelah ! ada angka maka invalid expression
@@ -176,22 +193,27 @@ double MenuAritmatika(char str[]){
 		else {
 			//jika operator sebelumnya memiliki hierarki lebih tinggi maka akan dioperasikan terlebih dahulu
         	// '()' memiliki hierarki lebih rendah karena tidak akan dioperasikan pada blok kode ini
-//        	printf("root: %s", data(root));
        		while (!isDigitString(data(root)) || flag == 0) {
        			if (!checkOperatorTree(root, str[i]) || root->left == NULL){
        				break;
 				}
 				temp = root;
+				//looping hingga right son NULL
+				//kemudian operasikan dari bawah ke atas
 				while (temp->right != NULL){
 					temp = temp->right;
 				}
 				if (isDigitString(data(temp))){
+					//temp adalah pointer untuk rightson paling bawah, sehingga menjadi num2
 					address num2 = temp;
+					//parent dari temp adalah operator
 					address opr = temp->parent;
+					//leftson dari operator adalah num1
 					address num1 = opr->left;
 					char tempOpr[3];
 					strcpy(tempOpr, data(opr));
 					double dnum1, dnum2;
+					//cek apakah num1 dan/atau num2 negatif
 					if (data(num1)[0]=='-'){
 						dnum1 = enumNegativeNumberString(data(num1));
 					}else{
@@ -202,8 +224,10 @@ double MenuAritmatika(char str[]){
 					}else{
 						dnum2 = strtod(data(num2), NULL);
 					}
+					//hasil operasi menggantikan data node operator
 					double result = Operation(dnum1, dnum2, (char)tempOpr[0]);
 					sprintf(data(opr), "%f", result);
+					//dealloc num1&num2 dan NULL kan leftson dan rightson nya
 					deallocNode(&num1);
 					deallocNode(&num2);
 					opr->right = NULL;
@@ -219,11 +243,14 @@ double MenuAritmatika(char str[]){
 			char opr[2];
 			opr[0] = str[i];
 			opr[1] = '\0';
+			//buat node tree
 			CreateNode(&temp, opr);
+			//mencari posisi node operator pada tree
 			GetPosOpr(&root, &temp);
 			flag = 1;
 		}
 	}
+	//jika sudah mencapai strlen, maka operasikan semua tree
 	while(isDigitString(data(root)) == false){
 		temp = root;
 		while (temp->right != NULL){

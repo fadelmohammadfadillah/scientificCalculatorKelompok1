@@ -2,67 +2,75 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "reno.h"
+#include <math.h> 
 #define iterasiLog 0.00001
 
 double logBase10(double angka){
 	/*
+	Modul ini berfungsi untuk menghitung logaritma basis 10 dengan metode perulangan, 
+	Modul ini menerima inputan(parameter) angka yang bertipe double
+	Modul ini akan memberikan output berupa hasil logaritma basis 10 dari var angka, outputnya bertipe double
 	temp : var untuk penampungan hasil sementara untuk mencari pangkat yang mendekati angka yang ada di parameter
 	hasil : var untuk menampung untuk hasil
 	j : var untuk menampung looping dari pangkat koma
-	x : var untuk menampung angka yang dimasukan user agar angka tidak berubah saat membagi dengan 10
+	x : var untuk menampung angka yang dimasukan user agar var angka tidak berubah saat membagi dengan 10(basis)
 	*/
 	double hasil = 0, temp = 0, j=0, x;
-	if(angka<=0){
+	if(angka<=0){//Jika angka negatif atau 0
 		printf("Error ");
 		return 0;
 	}
 	x=angka;
-	while (x >= 10) {//perulangan selama x lebih dari atau sama dengan 10
-        x = x/10;
-        hasil++;//maka hasil ditambah 1
+	while (x >= 10) {//perulangan selama x lebih dari atau sama dengan 10(basis)
+        x = x/10;//x dibagi 10(basis)
+        hasil++;//maka hasil ditambah 1	
     }
     if(x != 1){//Jika setelah dibagi masih ada sisa
 	    while(temp < angka){//maka lakukan perulangan hingga var temp lebih atau sama dengan var angka
 	    	j = j+iterasiLog;//setiap looping j ditambahkan dengan iterasi
-	    	temp = pangkat(10, hasil+j);//temp diisi dengan hasil dari 10 pangkat hasil+j
+	    	temp = pow(10, hasil+j);//temp diisi dengan hasil dari 10 pangkat hasil+j
+//	    	printf("j:%f,temp:%f ", j+hasil,temp);
 		}
+		return hasil += j - iterasiLog;//hasil dikurangi iterasiLog agar hasil tetap akurat
+	}else{//Jika setelah dibagi x == 1(hasil dari log tidak memiliki koma)
+		return hasil;
 	}
-	return hasil += j;
+	
 }
 
-double logBase(double angka, double base){
-//	return logNature(angka)/logNature(base);
+double logBase(double angka, double basis){
 	/*
+	Modul ini berfungsi untuk menghitung logaritma basis bebas dengan metode perulangan, 
+	Modul ini menerima inputan(parameter) angka dan basis yang bertipe double
+	Modul ini akan memberikan output berupa hasil logaritma basis bebas dari var angka, outputnya bertipe double
 	temp : var untuk penampungan hasil sementara untuk mencari pangkat yang mendekati angka yang dimasukan user
 	hasil : var untuk menampung untuk hasil
 	j : var untuk menampung pangkat yang mendekati angka yang dimasukan user
 	x : var untuk menampung angka yang dimasukan user agar angka tidak berubah saat membagi dengan base
 	*/
-	if(angka<=0 || base<=0){
+	if(angka<=0 || basis<=0){//Jika angka atau basis kurang dari sama dengan 0
 		printf("Error ");
 		return 0;
 	}
-	double x, temp, hasil = 0, j = 0.0;
+	double x, temp = 0, hasil = 0, j = 0.0;
 	x=angka;
-	if(angka == base){//Jika angka == base maka return 1
+	if(angka == basis){//Jika value dari angka dan basis sama, maka return 1
 		return 1;
-	}else if(angka > base){
-		while (x >= base) {//perulangan selama x lebih dari atau sama dengan base
-        x = x/base;
+	}else if(angka > basis){
+		while (x >= basis) {//perulangan selama x lebih dari atau sama dengan basis
+        x = x/basis;//x dibagi basis
         hasil++;//maka hasil ditambah 1
     	}
     }
     if(x != 1){//Jika setelah dibagi masih ada sisa
 	    while(temp < angka){//maka lakukan perulangan hingga var hingga temp lebih atau sama dengan var angka
 	    	j = j+iterasiLog;//setiap looping j ditambahkan dengan iterasi
-	    	temp = pangkat(base, hasil+j);//temp diisi dengan hasil dari base pangkat hasil+j
+	    	temp = pow(basis, hasil+j);//temp diisi dengan hasil dari base pangkat hasil+j
+//	    	printf("j:%f,temp:%f ", j,temp);
 		}
-	}
-	if(angka < base){
-		printf("masuk");
-		return hasil += j - iterasiLog;
-	}else{
-		return hasil += j;
+		return hasil += j - iterasiLog;//hasil dikurangi iterasiLog agar hasil tetap akurat
+	}else{//Jika setelah dibagi x == 1(hasil dari log tidak memiliki koma)
+		return hasil;
 	}
 }
 

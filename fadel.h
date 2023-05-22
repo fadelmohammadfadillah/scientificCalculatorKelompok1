@@ -3,18 +3,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 #include <malloc.h>
 
 bool isDigit(char str){
+	/*cek apakah char adalah digit*/
 	if (str < '0' || str > '9'){
 		return false;
 	}else{
 		return true;
 	}
 }
-//-100 fadel
 bool isDigitString(char str[]){
+	/*cek apakah string tersebut adalah digit*/
 	if (str[0] < '0' || str[0] > '9'){
 		if (str[1] < '0' || str[1] > '9'){
 			return false;
@@ -25,6 +25,7 @@ bool isDigitString(char str[]){
 }
 
 bool isNegative(char string[], int i){
+	/*cek apakah char adalah negatif*/
 	if (string[i] == '-' && !isDigit(string[i-1])){
 		return true;
 	} else {
@@ -46,10 +47,9 @@ typedef struct tNode{
 	address left, right, parent;
 }BTNode;
 
-/*infotype fadel
-fadel = (infotype) malloc (10 * sizeof(char)*/
 
 void CreateNode(address *btr, infotype X){
+	/*alokasi node baru*/
 	address tr;
 	tr = (address) malloc (sizeof(BTNode));
 	if (tr != NULL){
@@ -62,10 +62,13 @@ void CreateNode(address *btr, infotype X){
 }
 
 void GetPosNum (address *root, address *newNode){
+	/*jika root NULL, maka Node saat ini menjadi root*/
 	if (*root == NULL){
 		*root = *newNode;
 		return;
 	}
+	/*jika root tidak kosong, maka loop hingga right son
+	NULL, newNode menjadi rightson*/
 	address temp = *root;
 	while (right(temp) != NULL){
 		temp = right(temp);
@@ -103,6 +106,7 @@ void GetPosOpr (address *root, address *newOpr) {
 }
 
 void deallocNode(address *node){
+	/*mendealokasi node tree dari memori*/
 	left(*node) = NULL;
 	right(*node) = NULL;
 	parent(*node) = NULL;
@@ -132,6 +136,9 @@ double Mod(double num1, double num2){
 }
 
 int operatorPriority(char opr){
+	/*
+	memilihkan prioritas operator berdasarkan aturan matematika
+	*/
 	switch (opr) {
         case '^':
 		case 'v':
@@ -181,6 +188,12 @@ bool checkOperatorTree(address root, char str){
 }
 
 double enumNegativeNumberString(char str[]){
+	/*
+	enumerasi untuk string yang berisikan negatif number
+	maka return hasil dari number dikali negatif
+	AUTHOR: FADEL
+	
+	*/
 	int i=1, n=0;
 	char tempNum[10];
 	double num;
