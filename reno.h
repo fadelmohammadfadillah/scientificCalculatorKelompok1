@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-double LogNature(double angka) // modul log natural, fungsi ini menerima sebuah argumen berupa bilangan yang akan dihitung logaritma basis e nya, dengan parameter angka berjenis input
+double logNature(double angka) // modul log natural, fungsi ini menerima sebuah argumen berupa bilangan yang akan dihitung logaritma basis e nya, dengan parameter angka berjenis input
 	{ 
 	 if (angka <= 0) {
      	printf("[ERROR]: Argumen harus lebih dari 0");
@@ -17,7 +17,7 @@ double LogNature(double angka) // modul log natural, fungsi ini menerima sebuah 
         hasil = hasil + temp;
         temp = temp * -1;
         i++;
-        temp = pow ((angka - 1) / angka , i) / i; //menggunakan fungsi pangkat yang ada pada adi.h
+        temp = pangkat ((angka - 1) / angka , i) / i; //menggunakan fungsi pangkat yang ada pada adi.h
     }
      return hasil;
 }
