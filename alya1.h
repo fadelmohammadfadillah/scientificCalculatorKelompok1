@@ -110,8 +110,8 @@ double HitungCotan(double derajat) {
 
 // Fungsi untuk menghitung invers sinus
 double Inverse_Sin(double angka) {
-    double batas_bawah = -1.57; // Batas bawah dalam radian
-    double batas_atas = 1.57; // Batas atas dalam radian
+    double batas_bawah = -PI / 2.0; // Batas bawah dalam radian
+    double batas_atas = PI / 2.0; // Batas atas dalam radian
     double toleransi = 0.00001; // Toleransi perbedaan nilai
     double tebakan = (batas_atas + batas_bawah) / 2.0; // Tebakan awal
     double nilai = sinus(tebakan); // Nilai sinus dari tebakan
@@ -132,8 +132,8 @@ double Inverse_Sin(double angka) {
 
 // Fungsi untuk menghitung invers kosinus
 double Inverse_Cos(double angka) {
-    double batas_bawah = 0.0; // Batas bawah dalam radian
-    double batas_atas = 1.57; // Batas atas dalam radian
+    double batas_bawah = -PI / 2.0; // Batas bawah dalam radian
+    double batas_atas = PI / 2.0; // Batas atas dalam radian
     double toleransi = 0.00001; // Toleransi perbedaan nilai
     double tebakan = (batas_atas + batas_bawah) / 2.0; // Tebakan awal
     double nilai = kosinus(tebakan); // Nilai kosinus dari tebakan
