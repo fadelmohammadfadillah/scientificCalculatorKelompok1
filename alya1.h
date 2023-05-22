@@ -42,6 +42,8 @@ double kosinus(double x) {
 double tangen(double x) { // fungsi tangen dalam radian
 	if ( x == PI / 2 || x == 3*PI /2){
 		printf("Nilai tak terdefinisi (undefined) \n");
+		printf("ERROR " );
+		return 0;
 	}else{
 		return sinus(x) / kosinus(x);
 	}		
@@ -54,10 +56,13 @@ double HitungCosec(double derajat) {
     // Memeriksa kondisi tak terdefinisi
     if (sin_val == 0) {
         printf("Nilai tak terdefinisi (undefined) untuk cosec(%lf)\n", derajat);
-        return 0.0;
+        printf("ERROR " );
+		return 0;
     } else {
         if (derajat == 180 || derajat == 360){
         	printf("Nilai tak terdefenisi (undefined) untuk cosec(%lf)\n", derajat);
+			printf("ERROR " );
+			return 0;
 		}else{
 			return 1 / sin_val;
 		}
@@ -71,10 +76,13 @@ double HitungSec(double derajat) {
     // Memeriksa kondisi tak terdefinisi
     if (cos_val == 0) {
         printf("Nilai tak terdefinisi (undefined) untuk sec(%lf)\n", derajat);
-        return 0.0;
+        printf("ERROR " );
+		return 0;
     } else {
     	if (derajat == 90 || derajat == 270){
         	printf("Nilai tak terdefenisi (undefined) untuk secan(%lf)\n", derajat);
+			printf("ERROR " );
+			return 0;
 		}else{
 			return 1 / cos_val;
 		}
@@ -87,10 +95,13 @@ double HitungCotan(double derajat) {
     // Memeriksa kondisi tak terdefinisi
     if (tan_val == 0) {
         printf("Nilai tak terdefinisi (undefined) untuk cotan(%lf)\n", derajat);
-        return 0;
+        printf("ERROR " );
+		return 0;
     } else {
     	if (derajat == 180 || derajat == 360){
         	printf("Nilai tak terdefenisi (undefined) untuk cosec(%lf)\n", derajat);
+			printf("ERROR " );
+			return 0;
 		}else{
 			return 1 / tan_val;
 		}
@@ -100,8 +111,8 @@ double HitungCotan(double derajat) {
 //program untuk invers trigonometri
 
 double Inverse_Sin(double angka) {
-    double batas_bawah = -1.0;
-    double batas_atas = 1.0;
+    double batas_bawah = -1.57;
+    double batas_atas = 1.57;
     double toleransi = 0.00001;
     double tebakan = (batas_atas + batas_bawah) / 2.0;
     double nilai = sinus(tebakan);
@@ -122,7 +133,7 @@ double Inverse_Sin(double angka) {
 
 double Inverse_Cos(double angka) {
     double batas_bawah = 0.0;
-    double batas_atas = 1.0;
+    double batas_atas = 1.57;
     double toleransi = 0.00001;
     double tebakan = (batas_atas + batas_bawah) / 2.0;
     double nilai = kosinus(tebakan);
